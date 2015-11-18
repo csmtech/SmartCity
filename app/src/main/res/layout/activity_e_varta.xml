@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+   <!-- <LinearLayout style="@style/TitleInfoBar"
+        android:id="@+id/layout1">
+
+        <ImageView style="@style/TitleBarLogo"
+            android:id="@+id/img1"
+            android:src="@drawable/news1"
+
+            android:layout_marginTop = "5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginBottom = "5dip"
+            android:paddingBottom = "5dip"
+            android:background="#FF5722"
+            android:layout_gravity="center"
+            android:paddingLeft="5dip"
+            android:paddingRight="7dip" />
+
+        <ImageView android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:id="@+id/sep"
+            android:background="@drawable/separator"
+            android:layout_marginRight="7dip"
+            />
+
+        <TextView style="@style/TitleBarText"
+            android:id="@+id/tv1"
+            android:paddingLeft = "8dip"
+            android:text="e-Varta"/>
+        <ImageView android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:id="@+id/sepa"
+            android:background="@drawable/separator"
+            android:layout_marginRight="7dip"
+            />
+        <ImageView style="@style/TitleBarLogo"
+            android:id="@+id/img2"
+            android:src="@drawable/options27"
+            android:onClick="onHome"
+            android:layout_marginTop = "5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginBottom = "5dip"
+            android:paddingBottom = "5dip"
+            android:background="#FF5722"
+            android:layout_gravity="center"
+            android:paddingLeft="5dip"
+
+            android:paddingRight="7dip" />
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+        android:padding="6dip">
+
+       <!-- <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prog_connect"
+            style="?android:attr/android:progressBarStyleSmall"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />-->
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/changeAgentswipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/prog_connect">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/evarta_recycle_view"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

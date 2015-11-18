@@ -1,0 +1,105 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:background="@color/cement"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.csm.activation.ActivationActivity"
+        android:minWidth="100dp">
+
+        <TextView android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:elegantTextHeight="false"
+            android:gravity="center|fill_vertical"
+            android:textSize="17sp"
+            android:id="@+id/textView4"
+            android:layout_marginTop="50dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/actLabel"
+            android:id="@+id/textView3"
+            android:layout_marginTop="28dp"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:id="@+id/linearLayout"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:ems="10"
+                android:maxLength="4"
+                android:id="@+id/edtOTP"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center"
+            android:id="@+id/linearLayout2"
+            android:layout_marginTop="20dp" android:layout_marginLeft="20dp">
+            <TextView android:text="@string/SMSActivationLabel"
+                android:layout_width="215dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content"
+                android:elegantTextHeight="false"
+                android:textSize="17sp"
+                android:id="@+id/smsText" android:layout_marginLeft="10dp"
+                />
+            <TextView android:text="00"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:elegantTextHeight="false"
+                android:textSize="17sp"
+                android:id="@+id/smsTimeText"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/linearLayout1"
+            android:layout_marginTop="30dp" android:layout_marginLeft="40dp"
+            android:layout_marginBottom="20dp">
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:text="@string/activationSubmitBtn"
+                android:id="@+id/btnsubmit"
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:clickable="false"  />
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/activationBtn"
+                android:id="@+id/button5"
+                android:onClick="activateBtnClick"
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

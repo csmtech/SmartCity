@@ -1,0 +1,293 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_margin="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal" >
+                <com.joanzapata.iconify.widget.IconButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/solidtext"
+                    android:gravity="center"
+                    android:text="Solid Waste Mgmt.\n{fa-trash 30sp #606060}"
+                    android:onClick="openPopup"
+                    android:textSize="10sp"
+                    android:tag="6"
+                    android:layout_marginRight="1sp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:textColor="#949494"
+                    android:lineSpacingExtra="8dp"
+                    android:textStyle="bold" />
+                <com.joanzapata.iconify.widget.IconButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/streetText"
+                    android:gravity="center"
+                    android:text="Street Light\n{fa-lightbulb-o 30sp #606060}"
+                    android:onClick="openPopup"
+                    android:textSize="10sp"
+                    android:tag="8"
+                    android:layout_marginRight="1sp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:textColor="#949494"
+                    android:lineSpacingExtra="8dp"
+                    android:textStyle="bold" />
+                <com.joanzapata.iconify.widget.IconButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/watrText"
+                    android:gravity="center"
+                    android:text="Drinking Water\n{ic-drinkingwater 27sp #606060}"
+                    android:onClick="openPopup"
+                    android:textSize="10sp"
+                    android:tag="10"
+                    android:layout_marginRight="1sp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:textColor="#949494"
+                    android:lineSpacingExtra="8dp"
+                    android:textStyle="bold" />
+                <com.joanzapata.iconify.widget.IconButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/sewrageText"
+                    android:gravity="center"
+                    android:text="Sewage\n{ic-sewage 27sp #606060}"
+                    android:onClick="openPopup"
+                    android:textSize="10sp"
+                    android:tag="11"
+                    android:layout_marginRight="1sp"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:textColor="#949494"
+                    android:lineSpacingExtra="8dp"
+                    android:textStyle="bold" />
+                <com.joanzapata.iconify.widget.IconButton
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/micselnousText"
+                    android:gravity="center"
+                    android:text="Misc. Grievance\n{fa-envelope-o 30sp #606060}"
+                    android:onClick="openPopup"
+                    android:textSize="10sp"
+                    android:tag="12"
+                    android:layout_marginRight="1sp"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:textColor="#949494"
+                    android:lineSpacingExtra="8dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/typeText"
+            android:gravity="center"
+            android:background="#f9810e"
+            android:textColor="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="#ffffff"
+            android:paddingTop="10dp"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="500 characters"
+                android:id="@+id/charLength"
+                android:layout_marginRight="17dp"
+                android:textColor="#979797"
+                android:textStyle="italic"
+                android:layout_alignParentRight="true" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:inputType="textMultiLine"
+                android:maxLength="500"
+                android:id="@+id/complnDtl"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edittextstyle"
+                android:gravity="top"
+                android:layout_below="@+id/charLength"
+                android:hint="Enter your Idea Here"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="5dp"
+                android:layout_marginBottom="7dp" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#DFDEDE"
+                android:layout_below="@+id/complnDtl" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableView"
+                android:layout_below="@+id/complnDtl"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:divider="@drawable/vertical_devider"
+                android:showDividers="middle"
+                android:focusable="true">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="takePhoto"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="{fa-camera 20dp #cecece} Take a Photo"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="pickPhoto"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/imageView9"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="{fa-picture-o 20dp #cecece} Pick from Gallery"
+                        android:gravity="fill_vertical|center_horizontal"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/tableView"
+                android:visibility="gone"
+                android:id="@+id/layoutImageUpload">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/complnImage"
+                    android:scaleType="centerCrop" />
+                <com.github.lzyzsd.circleprogress.DonutProgress
+                    android:layout_marginLeft="50dp" android:visibility="gone"
+                    android:id="@+id/progressBar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    custom:donut_progress="0"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    custom:donut_finished_color="#43A078"
+                    custom:donut_text_color="#43A078"
+                    custom:donut_background_color="#ffffff"
+                    custom:donut_finished_stroke_width="5dp"
+                    custom:donut_unfinished_stroke_width="5dp"
+                    custom:donut_text_size="12sp"
+                    />
+                <com.joanzapata.iconify.widget.IconButton
+                    android:visibility="gone"
+                    android:id="@+id/upload"
+                    android:layout_width="30dp" android:layout_marginLeft="50dp"
+                    android:layout_height="30dp" android:layout_alignParentBottom="true"
+                    android:text="{fa-check #29E2C1 30sp }"
+                    android:background="@drawable/buttonshape"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp" />
+
+                <com.joanzapata.iconify.widget.IconButton
+                    android:visibility="gone"
+                    android:onClick="retry"
+                    android:id="@+id/retry" android:layout_centerInParent="true"
+                    android:layout_width="70dp" android:layout_marginLeft="50dp"
+                    android:layout_height="70dp" android:layout_alignParentBottom="false"
+                    android:layout_centerHorizontal="true"
+                    android:text="{fa-refresh #F9810E 20sp }\n Retry"
+                    android:background="@drawable/bgcompln_circle"
+                    android:textSize="12sp"
+                    />
+                <com.joanzapata.iconify.widget.IconButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="{fa-times-circle 28sp #F9810E}"
+                    android:id="@+id/crossBtn"
+                    android:layout_alignTop="@+id/complnImage"
+                    android:layout_alignRight="@+id/complnImage"
+                    android:layout_alignEnd="@+id/complnImage"
+                    android:onClick="closeImg"
+                    android:nestedScrollingEnabled="true"
+                    android:layout_gravity="top|right"
+                    android:background="@drawable/bgcompln_circle"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <com.joanzapata.iconify.widget.IconButton
+            android:layout_width="80dp"
+            android:layout_height="45dp"
+            android:text="{fa-check} Post"
+            android:id="@+id/complnpost"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#ffffff"
+            android:textAlignment="center"
+            android:background="@drawable/button_shape"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="right"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginRight="10dp"
+            android:paddingTop="10dp"
+            android:padding="10dp" />
+    </LinearLayout>
+</ScrollView>

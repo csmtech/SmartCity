@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.csm.smartcity" >
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.NETWORK" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <application
+        android:name=".common.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".splashScreen.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".login.LoginActivity" >
+        </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider516585361840740"
+            android:exported="true" />
+
+        <activity
+            android:name=".idea.IdeaActivity"
+            android:label="@string/idea"
+            android:theme="@style/IdeaTheme" >
+        </activity>
+        <activity android:name=".mobLogin.MobileValidationActivity" >
+        </activity>
+        <activity android:name=".userRegistration.UserRegistrationActivity" >
+        </activity>
+        <activity android:name=".activation.ActivationActivity" >
+        </activity>
+        <activity
+            android:name=".dashboard.NewDashboardActivity"
+            android:label="@string/title_activity_new_dashboard"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ideaRegistration.IdeaRegistrationActivity"
+            android:label="@string/title_activity_idea_registration">
+        </activity>
+        <activity
+            android:name=".ideaRegistration.TypePopUpActivity"
+            android:label="@string/title_activity_type_pop_up" >
+        </activity>
+        <activity
+            android:name=".information.InformationActivity"
+            android:label="Information" >
+        </activity>
+        <activity
+            android:name=".information.eVartaActivity"
+            android:label="e-Varta" >
+        </activity>
+        <activity
+            android:name=".information.AnnouncementActivity"
+            android:label="Announcement" >
+        </activity>
+        <activity
+            android:name=".information.AnnouncementDtlActivity"
+            android:label="Announcement Detail" >
+        </activity>
+        <activity
+            android:name=".catagoryIdeas.CatagoryIdeaActivity" >
+        </activity>
+    </application>
+
+</manifest>

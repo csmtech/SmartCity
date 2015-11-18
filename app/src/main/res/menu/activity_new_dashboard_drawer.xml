@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/appData"
+            android:icon="@drawable/savefile"
+            android:title="Update Applicatio data" />
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/version"
+            android:title="Version"
+            >
+            <!--<menu >-->
+                <!--&lt;!&ndash;<group&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/group2"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:checkableBehavior="single">&ndash;&gt;-->
+                    <!--<item-->
+                        <!--android:id="@+id/submenu1" android:title="1.0" />-->
+                <!--&lt;!&ndash;</group>&ndash;&gt;-->
+            <!--</menu>-->
+
+        </item>
+
+        <!--<item-->
+            <!--android:id="@+id/nav_slideshow"-->
+            <!--android:icon="@android:drawable/ic_menu_slideshow"-->
+            <!--android:title="Slideshow" />-->
+
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@android:drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@android:drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>
