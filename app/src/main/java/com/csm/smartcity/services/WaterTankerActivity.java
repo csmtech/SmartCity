@@ -1,45 +1,18 @@
-package com.csm.smartcity.information;
+package com.csm.smartcity.services;
 
-import android.app.ActionBar;
-import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.csm.smartcity.R;
-import com.csm.smartcity.dashboard.NewDashboardActivity;
 
-public class InformationActivity extends AppCompatActivity {
+public class WaterTankerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information);
-        if (Build.VERSION.SDK_INT < 16) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-
-    }
-    public void onHome(View v)
-
-    {
-        startActivity(new Intent(this, NewDashboardActivity.class));
-    }
-    public void onNews(View v)
-
-    {
-        startActivity(new Intent(this, eVartaActivity.class));
-    }
-    public void onAnnouncement(View v)
-
-    {
-        startActivity(new Intent(this, AnnouncementActivity.class));
+        setContentView(R.layout.activity_water_tanker);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

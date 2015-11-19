@@ -1,16 +1,10 @@
 package com.csm.smartcity.information;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LevelListDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.Html.ImageGetter;
-import android.text.Spanned;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +14,11 @@ import com.csm.smartcity.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnnouncementDtlActivity extends AppCompatActivity  {
+public class AnnouncementDtlActivity extends AppCompatActivity {
     RecyclerViewAnnouncementDtlAdapter adapter;
     RecyclerView recyclerView;
     private static List<Model> demoData;
-    private final String htmlText = "<body><p><img src=\"mbl.jpg\">"+
+    private final String htmlText = "<body><p><img src=\"http://developer.android.com/assets/images/dac_logo.png\"/>"+
             "</p>" +
             "Geek Snack\n"+"Android M and Mediatek's Helio P10 team up for Elephone</body>";
     @Override
@@ -42,8 +36,23 @@ public class AnnouncementDtlActivity extends AppCompatActivity  {
             Model model = new Model();
             //model.txtNews = Html.fromHtml("<p>This is the first line</p>\n" + "<p>This is the second line</p><p>Third line...</p>").toString();
             //model.txtAnnouncement= Html.fromHtml(htmlText, imgGetter, null).toString();
-           Spanned spanned = Html.fromHtml(htmlText,new ImageGetter(), null);
-            model.txtAnnouncement=spanned.toString();
+          /* Spanned spanned = Html.fromHtml(htmlText, new Html.ImageGetter() {
+               @Override
+               public Drawable getDrawable(final String source) {
+                   Drawable d = null;
+                   try {
+                       d = getResources().getDrawable(Integer.parseInt(source));
+                       d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+                   } catch (Resources.NotFoundException e) {
+                      // Log.e("log_tag", "Image not found. Check the ID.", e);
+                   } catch (NumberFormatException e) {
+                      // Log.e("log_tag", "Source string not a valid resource ID.", e);
+                   }
+
+                   return d;
+               }
+           }, null);*/
+            model.txtAnnouncement=htmlText;
             demoData.add(model);
         }
         adapter = new RecyclerViewAnnouncementDtlAdapter(demoData);
@@ -55,50 +64,7 @@ public class AnnouncementDtlActivity extends AppCompatActivity  {
     {
         startActivity(new Intent(this, AnnouncementActivity.class));
     }
-    private class ImageGetter implements Html.ImageGetter {
 
-        public Drawable getDrawable(String source) {
-           /* int id;
-
-            if (source.equals("mbl.jpg")) {
-                id = R.drawable.mbl;
-
-
-            }
-            else {
-                return null;
-            }
-
-            Drawable d = getResources().getDrawable(id);
-            d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
-
-            return d;*/
-            Drawable d = null;
-            int id;
-            try {
-               // d = getResources().getDrawable(Integer.parseInt(source));
-               // d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-
-
-                if (source.equals("mbl.jpg")) {
-                    id = R.drawable.mbl;
-
-
-                }
-                else {
-                    return null;
-                }
-              d = getResources().getDrawable(id);
-                d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
-            } catch (Resources.NotFoundException e) {
-                System.out.println("Image not found. Check the ID.");
-            } catch (NumberFormatException e) {
-                System.out.println("Source string not a valid resource ID.");
-            }
-
-            return d;
-        }
-    };
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

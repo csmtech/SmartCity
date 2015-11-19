@@ -1,5 +1,6 @@
 package com.csm.smartcity.dashboard;
 
+import android.app.Service;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +38,7 @@ import com.csm.smartcity.connection.CustomVolleyRequestQueue;
 import com.csm.smartcity.idea.IdeaActivity;
 import com.csm.smartcity.information.InformationActivity;
 import com.csm.smartcity.login.LoginActivity;
+import com.csm.smartcity.services.Services;
 import com.csm.smartcity.sqlLiteModel.DatabaseHandler;
 import com.csm.smartcity.sqlLiteModel.LoginUserObject;
 import com.facebook.login.LoginManager;
@@ -338,5 +340,9 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
             bmImage.setImageBitmap(result);
         }
     }
+    public void onService(View v)
 
+    {
+        startActivity(new Intent(this, Services.class));
+    }
 }

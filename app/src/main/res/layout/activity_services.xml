@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+   <!-- <LinearLayout style="@style/TitleServiceBar"
+        android:id="@+id/layout1">
+
+        <ImageView style="@style/TitleBarLogo"
+            android:id="@+id/img1"
+            android:src="@drawable/service"
+
+            android:layout_marginTop = "5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginBottom = "5dip"
+            android:paddingBottom = "5dip"
+            android:background="#673AB7"
+            android:layout_gravity="center"
+            android:paddingLeft="5dip"
+            android:paddingRight="7dip" />
+
+        <ImageView android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:id="@+id/sep"
+            android:background="@drawable/separator"
+            android:layout_marginRight="7dip"
+            />
+
+        <TextView style="@style/TitleBarText"
+            android:id="@+id/tv1"
+            android:paddingLeft = "8dip"
+            android:text="Services"/>
+        <ImageView android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:id="@+id/sepa"
+            android:background="@drawable/separator"
+            android:layout_marginRight="7dip"
+            />
+        <ImageView style="@style/TitleBarLogo"
+            android:id="@+id/img2"
+            android:src="@drawable/options27"
+            android:onClick="onHome"
+            android:layout_marginTop = "5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginBottom = "5dip"
+            android:paddingBottom = "5dip"
+            android:background="#673AB7"
+            android:layout_gravity="center"
+            android:paddingLeft="5dip"
+
+            android:paddingRight="7dip" />
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+        android:padding="6dip">
+
+        <LinearLayout style="@style/ActivityBody"
+            android:layout_weight="0">
+
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="40dip"
+                android:paddingRight="30dip"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="30dip">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mrg"
+                    android:onClick="onMarriage"
+
+                    android:src="@drawable/marriage" />
+
+                <TextView style="@style/ServiceText"
+                    android:id="@+id/mrgTxt"
+                    android:text="Marriage Certificate"
+                    android:layout_marginTop="10dip"/>
+
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="40dip"
+                android:paddingRight="30dip"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="30dip">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cesspool"
+                    android:onClick="onCesspool"
+
+                    android:src="@drawable/vehicle1" />
+
+                <TextView style="@style/ServiceText"
+                    android:id="@+id/vehicle"
+                    android:text="Cesspool Vehicle"
+                    android:layout_marginTop="10dip"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ActivityBody"
+            android:layout_weight="0">
+
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dip"
+                android:layout_marginBottom="40dip"
+                android:paddingRight="30dip"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="30dip">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/waterImg"
+                    android:onClick="onWater"
+
+                    android:src="@drawable/water" />
+
+                <TextView style="@style/ServiceText"
+                    android:id="@+id/waterTxt"
+                    android:text="Water Tanker"
+                    android:layout_marginTop="10dip"/>
+
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dip"
+                android:layout_marginBottom="40dip"
+                android:paddingRight="30dip"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="30dip">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mahaYatra"
+                    android:onClick="onMahayatra"
+
+                    android:src="@drawable/mahayatra" />
+
+                <TextView style="@style/ServiceText"
+                    android:id="@+id/mahayatraVehicle"
+                    android:text="Mahayatra Vehicle"
+                    android:layout_marginTop="10dip"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ActivityBody"
+            android:layout_weight="0">
+
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dip"
+                android:layout_marginBottom="40dip"
+                android:paddingRight="30dip"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="30dip">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/YatriImg"
+                    android:onClick="onYatrinivas"
+
+                    android:src="@drawable/yatrinivas" />
+
+                <TextView style="@style/ServiceText"
+                    android:id="@+id/yatriTxt"
+                    android:text="Yatri Nivas"
+                    android:layout_marginTop="10dip"/>
+
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dip"
+                android:layout_marginBottom="40dip"
+                android:paddingRight="30dip"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="30dip">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/kalyanMandap"
+                    android:onClick="onKalyanMandap"
+
+                    android:src="@drawable/house99" />
+
+                <TextView style="@style/ServiceText"
+                    android:id="@+id/mandap"
+                    android:text="Kalyan Mandap"
+                    android:layout_marginTop="10dip"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
