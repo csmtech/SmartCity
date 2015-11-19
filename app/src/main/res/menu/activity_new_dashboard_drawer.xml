@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/editProfile"
+            android:icon="@drawable/configure"
+            android:title="Edit Profile" />
+        <item
             android:id="@+id/appData"
             android:icon="@drawable/savefile"
             android:title="Update Applicatio data" />

@@ -146,6 +146,7 @@ public class ActivationActivity extends AppCompatActivity {
                                         UtilityMethods.getAllData("ACT", ActivationActivity.this);
                                     }else {
                                         Intent i = new Intent(ActivationActivity.this, NewDashboardActivity.class);
+                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(i);
                                     }
                                 }else{

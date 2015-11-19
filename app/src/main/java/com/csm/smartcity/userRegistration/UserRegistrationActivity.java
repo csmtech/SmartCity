@@ -154,6 +154,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
         //IF condition for edit button click from profile page
         if(mobNo.equals("edit")) {
             LoginUserObject objLogin= AppCommon.getLoginPrefData(this);
+            Log.i("atag",objLogin.getMOBILENO());
+            Log.i("atag",objLogin.getEMAIL_ID());
             photoLBL.setText("Change photo");
             registerBtn.setText("Update");
             getSupportActionBar().setTitle("Update Profile");

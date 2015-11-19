@@ -41,6 +41,7 @@ import com.csm.smartcity.login.LoginActivity;
 import com.csm.smartcity.services.Services;
 import com.csm.smartcity.sqlLiteModel.DatabaseHandler;
 import com.csm.smartcity.sqlLiteModel.LoginUserObject;
+import com.csm.smartcity.userRegistration.UserRegistrationActivity;
 import com.facebook.login.LoginManager;
 
 import java.io.File;
@@ -183,6 +184,11 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
         } else {
             super.onBackPressed();
         }
+        if (AppCommon.isLogin(getApplicationContext())) {
+            this.moveTaskToBack(true);
+        }
+
+
     }
 
     @Override
@@ -213,8 +219,13 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if(id == R.id.editProfile){
 
-        if (id == R.id.appData) {
+            Intent actvI = new Intent(NewDashboardActivity.this, UserRegistrationActivity.class);
+            actvI.putExtra("mobNo","edit");
+            startActivity(actvI);
+
+        }else if (id == R.id.appData) {
             UtilityMethods.getAllData("upd", NewDashboardActivity.this);
             // Handle the camera action
         } else if (id == R.id.logout) {

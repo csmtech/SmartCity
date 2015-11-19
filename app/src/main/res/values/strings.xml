@@ -39,6 +39,7 @@
     <string name="title_activity_type_pop_up">Complaint Types</string>
     <string name="backtext">Back</string>
     <string name="title_activity_catagory_idea">CatagoryIdeaActivity</string>
+    <string name="title_activity_idea_comment">Comments</string>
 
 
 </resources>

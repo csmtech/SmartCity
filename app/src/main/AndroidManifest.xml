@@ -57,7 +57,7 @@
         </activity>
         <activity
             android:name=".ideaRegistration.IdeaRegistrationActivity"
-            android:label="@string/title_activity_idea_registration">
+            android:label="@string/title_activity_idea_registration" >
         </activity>
         <activity
             android:name=".ideaRegistration.TypePopUpActivity"
@@ -79,8 +79,11 @@
             android:name=".information.AnnouncementDtlActivity"
             android:label="Announcement Detail" >
         </activity>
+        <activity android:name=".catagoryIdeas.CatagoryIdeaActivity" >
+        </activity>
         <activity
-            android:name=".catagoryIdeas.CatagoryIdeaActivity" >
+            android:name=".ideaComment.IdeaCommentActivity"
+            android:label="@string/title_activity_idea_comment" >
         </activity>
     </application>
 

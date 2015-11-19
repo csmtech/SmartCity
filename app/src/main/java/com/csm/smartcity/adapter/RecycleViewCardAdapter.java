@@ -1,14 +1,32 @@
 package com.csm.smartcity.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.csm.smartcity.R;
+import com.csm.smartcity.common.AppCommon;
+import com.csm.smartcity.common.ColoredSnackbar;
+import com.csm.smartcity.ideaComment.IdeaCommentActivity;
 import com.joanzapata.iconify.widget.IconTextView;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 //fa-thumbs-up
 //fa-comments
@@ -32,7 +50,14 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof RecentViewHolder) {
+           /*Support Complaint Click*/
+            ((RecentViewHolder) holder).layoutLike.setOnClickListener(likeOnclickListener());
+            ((RecentViewHolder) holder).layoutComment.setOnClickListener(commentOnclickListener());
+            ((RecentViewHolder) holder).layoutShare.setOnClickListener(shareOnclickListener());
 
+
+        }
     }
 
     @Override
@@ -58,8 +83,8 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
         TextView txtShareIcon;
         TextView txtInviteIcon;
         LinearLayout layoutShare;
-        LinearLayout layoutSupport;
-        LinearLayout layoutInvite;
+        LinearLayout layoutLike;
+        LinearLayout layoutComment;
         LinearLayout layoutSupportShare;
         Button btnLocation;
         TextView txtClapCount;
@@ -92,10 +117,10 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
             //txtShareIcon = (TextView) itemView.findViewById(R.id.txt_icon_share);
            // txtInviteIcon = (TextView) itemView.findViewById(R.id.txt_icon_invite);
             layoutShare = (LinearLayout) itemView.findViewById(R.id.layoutShare);
-            layoutSupport = (LinearLayout) itemView.findViewById(R.id.layoutSupport);
+            layoutLike = (LinearLayout) itemView.findViewById(R.id.layoutLike);
             txtSupport = (TextView) itemView.findViewById(R.id.txtSupport);
            // btnLocation = (Button) itemView.findViewById(R.id.btnLocation);
-            layoutInvite = (LinearLayout) itemView.findViewById(R.id.layoutInvite);
+            layoutComment = (LinearLayout) itemView.findViewById(R.id.layoutComment);
             layoutSupportShare = (LinearLayout) itemView.findViewById(R.id.layout_support_share_bar);
             txtClapCount = (TextView) itemView.findViewById(R.id.txt_clap_count);
             layoutClap = (LinearLayout) itemView.findViewById(R.id.layout_clap);
@@ -111,11 +136,42 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
            // itemView.setOnClickListener(this);
         }
 
+
+
+
 //        @Override
 //        public void onClick(View v) {
 //            //  myClickListener.onItemClick(getAdapterPosition(), v);
 //        }
     }
+
+    private View.OnClickListener likeOnclickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
+    }
+    private View.OnClickListener commentOnclickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(), IdeaCommentActivity.class);
+                v.getContext().startActivity(intent);
+                ((Activity) v.getContext()).overridePendingTransition(R.animator.push_up_in, R.animator.push_up_out);
+            }
+        };
+    }
+    private View.OnClickListener shareOnclickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
+    }
+
 
 
 }

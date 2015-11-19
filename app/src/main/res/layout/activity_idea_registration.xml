@@ -9,117 +9,198 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-        <HorizontalScrollView
+        <!--<HorizontalScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:scrollbars="none"-->
+            <!--android:layout_margin="0dp">-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="70dp"-->
+                <!--android:orientation="horizontal" >-->
+                <!--<com.joanzapata.iconify.widget.IconButton-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/txtTransport"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}"-->
+                    <!--android:onClick="openPopup"-->
+                    <!--android:textSize="10sp"-->
+                    <!--android:tag="6"-->
+                    <!--android:layout_marginRight="1sp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#949494"-->
+                    <!--android:textStyle="bold" />-->
+                <!--<com.joanzapata.iconify.widget.IconButton-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/txtWaste"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}"-->
+                    <!--android:onClick="openPopup"-->
+                    <!--android:textSize="10sp"-->
+                    <!--android:tag="8"-->
+                    <!--android:layout_marginRight="1sp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#949494"-->
+                    <!--android:textStyle="bold" />-->
+                <!--<com.joanzapata.iconify.widget.IconButton-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/txtCitizens"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}"-->
+                    <!--android:onClick="openPopup"-->
+                    <!--android:textSize="10sp"-->
+                    <!--android:tag="10"-->
+                    <!--android:layout_marginRight="1sp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#949494"-->
+                    <!--android:textStyle="bold" />-->
+                <!--<com.joanzapata.iconify.widget.IconButton-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/txtTown"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #606060}"-->
+                    <!--android:onClick="openPopup"-->
+                    <!--android:textSize="10sp"-->
+                    <!--android:tag="11"-->
+                    <!--android:layout_marginRight="1sp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#949494"-->
+                    <!--android:textStyle="bold" />-->
+                <!--<com.joanzapata.iconify.widget.IconButton-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/txtOthers"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Others\n\n{fa-envelope 30sp #606060}"-->
+                    <!--android:onClick="openPopup"-->
+                    <!--android:textSize="10sp"-->
+                    <!--android:tag="12"-->
+                    <!--android:layout_marginRight="1sp"-->
+                    <!--android:background="#ffffff"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:textColor="#949494"-->
+                    <!--android:textStyle="bold" />-->
+            <!--</LinearLayout>-->
+
+        <!--</HorizontalScrollView>-->
+
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:layout_margin="0dp">
-            <LinearLayout
+            android:layout_height="wrap_content">
+            <TableRow android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+                <com.joanzapata.iconify.widget.IconButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/txtTransport"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}"
+                android:onClick="openPopup"
+                android:textSize="10sp"
+                android:tag="6"
+                android:layout_marginRight="1sp"
+                android:paddingBottom="10dp"
+                android:background="#ffffff"
+                android:textColor="#949494"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+
+                <com.joanzapata.iconify.widget.IconButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/txtWaste"
+                android:gravity="center"
+                android:text="Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}"
+                android:onClick="openPopup"
+                android:textSize="10sp"
+                android:paddingTop="10dp"
+                android:tag="8"
+                android:layout_marginRight="1sp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:textColor="#949494"
+                android:textStyle="bold" />
+                <com.joanzapata.iconify.widget.IconButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/txtCitizens"
+                android:gravity="center"
+                android:text="Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}"
+                android:onClick="openPopup"
+                android:textSize="10sp"
+                android:paddingTop="10dp"
+                android:tag="10"
+                android:layout_marginRight="1sp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:textColor="#949494"
+                android:textStyle="bold" />
+            </TableRow>
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:orientation="horizontal" >
-                <com.joanzapata.iconify.widget.IconButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/solidtext"
-                    android:gravity="center"
-                    android:text="Solid Waste Mgmt.\n{fa-trash 30sp #606060}"
-                    android:onClick="openPopup"
-                    android:textSize="10sp"
-                    android:tag="6"
-                    android:layout_marginRight="1sp"
-                    android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:padding="10dp"
-                    android:textColor="#949494"
-                    android:lineSpacingExtra="8dp"
-                    android:textStyle="bold" />
-                <com.joanzapata.iconify.widget.IconButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/streetText"
-                    android:gravity="center"
-                    android:text="Street Light\n{fa-lightbulb-o 30sp #606060}"
-                    android:onClick="openPopup"
-                    android:textSize="10sp"
-                    android:tag="8"
-                    android:layout_marginRight="1sp"
-                    android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:padding="10dp"
-                    android:textColor="#949494"
-                    android:lineSpacingExtra="8dp"
-                    android:textStyle="bold" />
-                <com.joanzapata.iconify.widget.IconButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/watrText"
-                    android:gravity="center"
-                    android:text="Drinking Water\n{ic-drinkingwater 27sp #606060}"
-                    android:onClick="openPopup"
-                    android:textSize="10sp"
-                    android:tag="10"
-                    android:layout_marginRight="1sp"
-                    android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:padding="10dp"
-                    android:textColor="#949494"
-                    android:lineSpacingExtra="8dp"
-                    android:textStyle="bold" />
-                <com.joanzapata.iconify.widget.IconButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/sewrageText"
-                    android:gravity="center"
-                    android:text="Sewage\n{ic-sewage 27sp #606060}"
-                    android:onClick="openPopup"
-                    android:textSize="10sp"
-                    android:tag="11"
-                    android:layout_marginRight="1sp"
-                    android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:padding="10dp"
-                    android:textColor="#949494"
-                    android:lineSpacingExtra="8dp"
-                    android:textStyle="bold" />
-                <com.joanzapata.iconify.widget.IconButton
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/micselnousText"
-                    android:gravity="center"
-                    android:text="Misc. Grievance\n{fa-envelope-o 30sp #606060}"
-                    android:onClick="openPopup"
-                    android:textSize="10sp"
-                    android:tag="12"
-                    android:layout_marginRight="1sp"
-                    android:background="#ffffff"
-                    android:padding="10dp"
-                    android:textColor="#949494"
-                    android:lineSpacingExtra="8dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp">
 
-        </HorizontalScrollView>
+                <com.joanzapata.iconify.widget.IconButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/txtTown"
+                android:gravity="center"
+                android:text="Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #606060}"
+                android:onClick="openPopup"
+                android:textSize="10sp"
+                android:tag="11"
+                android:layout_marginRight="1sp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="#949494"
+                android:textStyle="bold" />
+                <com.joanzapata.iconify.widget.IconButton
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/txtOthers"
+                android:gravity="center"
+                android:text="Others\n\n{fa-envelope 30sp #606060}"
+                android:onClick="openPopup"
+                android:textSize="10sp"
+                android:tag="12"
+                android:layout_marginRight="1sp"
+                android:background="#ffffff"
+                android:textColor="#949494"
+                android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/typeText"
-            android:gravity="center"
-            android:background="#f9810e"
-            android:textColor="@color/white"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textStyle="bold" />
+
+
+
 
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:background="#ffffff"
             android:paddingTop="10dp"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -141,9 +222,10 @@
                 android:background="@drawable/edittextstyle"
                 android:gravity="top"
                 android:layout_below="@+id/charLength"
-                android:hint="Enter your Idea Here"
+                android:hint="Enter your Ideas Here"
                 android:layout_marginLeft="10dp"
                 android:paddingLeft="5dp"
+                android:textSize="15sp"
                 android:layout_marginBottom="7dp" />
             <View
                 android:layout_width="fill_parent"

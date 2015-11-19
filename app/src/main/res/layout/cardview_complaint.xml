@@ -261,8 +261,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="right"
                     android:gravity="center_horizontal"
-                    android:id="@+id/layoutSupport"
-                    >
+                    android:id="@+id/layoutLike">
 
                    <!--<TextView-->
                         <!--android:layout_width="wrap_content"-->
@@ -275,7 +274,7 @@
                         android:layout_height="match_parent"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="{fa-thumbs-o-up 19sp} Like"
-                        android:id="@+id/txtSupport"
+                        android:id="@+id/txtLike"
                         android:textColor="#B5AFAE"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="3dp" />
@@ -294,8 +293,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:id="@+id/layoutShare"
-                    >
+                    android:id="@+id/layoutComment">
 
                     <!--<TextView-->
                         <!--android:layout_width="wrap_content"-->
@@ -309,7 +307,7 @@
                         android:layout_height="match_parent"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="{fa-comments-o 19sp} Comment"
-                        android:id="@+id/textView28"
+                        android:id="@+id/textComment"
                         android:textColor="#B5AFAE"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="3dp" />
@@ -328,7 +326,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:id="@+id/layoutInvite">
+                    android:id="@+id/layoutShare">
 
                     <!--<TextView-->
                         <!--android:layout_width="wrap_content"-->
@@ -342,7 +340,7 @@
                         android:layout_height="match_parent"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="{fa-share-alt 19sp} Share"
-                        android:id="@+id/textView27"
+                        android:id="@+id/textShare"
                         android:textColor="#B5AFAE"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="3dp" />

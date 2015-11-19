@@ -118,8 +118,8 @@ public class LoginActivity extends Activity {
                 //for facebook login error
                 @Override
                 public void onError(FacebookException e) {
-                    Log.i("atag","hello::::::::::::"+e);
-                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), e.getMessage(), Snackbar.LENGTH_LONG);
+                    Log.i("atag","hello::::::::::::"+e.getMessage());
+                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.FACEBOOK_ERROR, Snackbar.LENGTH_LONG);
                     ColoredSnackbar.confirm(snackbar).show();
                 }
             });

@@ -1,8 +1,10 @@
 package com.csm.smartcity.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -71,7 +73,7 @@ public class UtilityMethods {
 
                         if(message.equals("FB") || message.equals("ACT")){
                             Intent actvI=new Intent(context,NewDashboardActivity.class);
-                            actvI.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            actvI.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                            // ActivityCompat.finishAffinity(LoginActivity.class);
                             context.startActivity(actvI);
                         }else if(message.equals("Skip")){
@@ -89,6 +91,9 @@ public class UtilityMethods {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("TAG", "Error: " + error);
+                AppCommon.hideDialog();
+                Snackbar snackbar = Snackbar.make(((Activity)context).findViewById(android.R.id.content), CommonDialogs.FACEBOOK_ERROR, Snackbar.LENGTH_LONG);
+                ColoredSnackbar.confirm(snackbar).show();
             }
         });
         jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(

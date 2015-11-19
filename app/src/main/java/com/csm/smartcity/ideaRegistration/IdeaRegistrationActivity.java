@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -82,13 +83,13 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
       * Declaration of all view components
       * */
     //Declaration of all catagory icon buttons
-    IconButton solidtext; //For Solid waste management.tag-6
-    IconButton streetText;//For Street Light.tag-8
-    IconButton watrText;//For Drinking Water.tag-10
-    IconButton sewrageText;//For Sewage.tag-11
-    IconButton micselnousText;//For Miscellaneous Grievance.tag-12
+    IconButton txtTransport; //For Solid waste management.tag-6
+    IconButton txtWaste;//For Street Light.tag-8
+    IconButton txtCitizens;//For Drinking Water.tag-10
+    IconButton txtTown;//For Sewage.tag-11
+    IconButton txtOthers;//For Miscellaneous Grievance.tag-12
     //Declaration of type text which shows complaint typeof complaint catagory in orange color background
-    TextView typeText;
+  //  TextView typeText;
     //Declaration of complaint detail edit text view for complaint registration
     EditText complnDtl;
     //char length for complaint detail character count
@@ -185,18 +186,18 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         pb = (DonutProgress) findViewById(R.id.progressBar);
         viewGroup = ((ViewGroup) this.findViewById(android.R.id.content));
         //Getting all catagory icon button from xml by its id.
-        solidtext=(IconButton)findViewById(R.id.solidtext);
-        streetText=(IconButton)findViewById(R.id.streetText);
-        watrText=(IconButton)findViewById(R.id.watrText);
-        sewrageText=(IconButton)findViewById(R.id.sewrageText);
-        micselnousText=(IconButton)findViewById(R.id.micselnousText);
+        txtTransport=(IconButton)findViewById(R.id.txtTransport);
+        txtWaste=(IconButton)findViewById(R.id.txtWaste);
+        txtCitizens=(IconButton)findViewById(R.id.txtCitizens);
+        txtTown=(IconButton)findViewById(R.id.txtTown);
+        txtOthers=(IconButton)findViewById(R.id.txtOthers);
         /*
         * Getting typetext text view from xml by its id.
         * Initially it is hidden
         * After selecting complaint type it shown in orange color background text view
         * */
-        typeText=(TextView)findViewById(R.id.typeText);
-        typeText.setVisibility(View.GONE); //Initially it is hidden
+//        typeText=(TextView)findViewById(R.id.typeText);
+//        typeText.setVisibility(View.GONE); //Initially it is hidden
         complnDtl=(EditText)findViewById(R.id.complnDtl); //Getting complaint detail edit text component
         charLength=(TextView)findViewById(R.id.charLength); //Getting complaint detail char length text view component
         /*
@@ -547,12 +548,79 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
     public void openPopup(View v){
         catagoryID=v.getTag().toString();//Getting catagory id from XML tag attribute
 
-        //Opening type pop up activity
-        Intent popup=new Intent(this, TypePopUpActivity.class);
-        popup.putExtra("CatagoryId", catagoryID);
-        startActivityForResult(popup, OPEN_TYPEPOPUP);
-        //Adding transition animation to open the page
-        overridePendingTransition(R.animator.push_up_in, R.animator.push_up_out);
+               if(catagoryID.equals("6")){
+                   txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #E36C09}");
+                   txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
+                   txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
+                   txtTown.setText("Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #606060}");
+                   txtOthers.setText("Others\n\n{fa-envelope 30sp #606060}");
+
+                   txtTransport.setTextColor(Color.parseColor("#E36C09"));
+                   txtWaste.setTextColor(Color.parseColor("#606060"));
+                   txtCitizens.setTextColor(Color.parseColor("#606060"));
+                   txtTown.setTextColor(Color.parseColor("#606060"));
+                   txtOthers.setTextColor(Color.parseColor("#606060"));
+                }else if(catagoryID.equals("8")){
+                   txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
+                   txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #E36C09}");
+                   txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
+                   txtTown.setText("Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #606060}");
+                   txtOthers.setText("Others\n\n{fa-envelope 30sp #606060}");
+
+                   txtTransport.setTextColor(Color.parseColor("#606060"));
+                   txtWaste.setTextColor(Color.parseColor("#E36C09"));
+                   txtCitizens.setTextColor(Color.parseColor("#606060"));
+                   txtTown.setTextColor(Color.parseColor("#606060"));
+                   txtOthers.setTextColor(Color.parseColor("#606060"));
+                }else if(catagoryID.equals("10")){
+                   txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
+                   txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
+                   txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #E36C09}");
+                   txtTown.setText("Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #606060}");
+                   txtOthers.setText("Others\n\n{fa-envelope 30sp #606060}");
+
+                   txtTransport.setTextColor(Color.parseColor("#606060"));
+                   txtWaste.setTextColor(Color.parseColor("#606060"));
+                   txtCitizens.setTextColor(Color.parseColor("#E36C09"));
+                   txtTown.setTextColor(Color.parseColor("#606060"));
+                   txtOthers.setTextColor(Color.parseColor("#606060"));
+                }else if(catagoryID.equals("11")){
+                   txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
+                   txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
+                   txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
+                   txtTown.setText("Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #E36C09}");
+                   txtOthers.setText("Others\n\n{fa-envelope 30sp #606060}");
+
+                   txtTransport.setTextColor(Color.parseColor("#606060"));
+                   txtWaste.setTextColor(Color.parseColor("#606060"));
+                   txtCitizens.setTextColor(Color.parseColor("#606060"));
+                   txtTown.setTextColor(Color.parseColor("#E36C09"));
+                   txtOthers.setTextColor(Color.parseColor("#606060"));
+                }else if(catagoryID.equals("12")){
+                   txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
+                   txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
+                   txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
+                   txtTown.setText("Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #606060}");
+                   txtOthers.setText("Others\n\n{fa-envelope 30sp #E36C09}");
+
+                   txtTransport.setTextColor(Color.parseColor("#606060"));
+                   txtWaste.setTextColor(Color.parseColor("#606060"));
+                   txtCitizens.setTextColor(Color.parseColor("#606060"));
+                   txtTown.setTextColor(Color.parseColor("#606060"));
+                   txtOthers.setTextColor(Color.parseColor("#E36C09"));
+                }
+
+
+
+
+//        //Opening type pop up activity
+//        Intent popup=new Intent(this, TypePopUpActivity.class);
+//        popup.putExtra("CatagoryId", catagoryID);
+//        startActivityForResult(popup, OPEN_TYPEPOPUP);
+//        //Adding transition animation to open the page
+//        overridePendingTransition(R.animator.push_up_in, R.animator.push_up_out);
+
+
     }
 
     public void takePhoto(View v) {
@@ -697,39 +765,39 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
             else if(requestCode==3 && data!=null) {
                 typeName=data.getStringExtra("typeName");
                 typeID=data.getStringExtra("typeId");
-                typeText.setText(typeName);
-                typeText.setVisibility(View.VISIBLE);
-                if(catagoryID.equals("6")){
-                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #f9810e}");
-                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-                }else if(catagoryID.equals("8")){
-                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #f9810e}");
-                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-                }else if(catagoryID.equals("10")){
-                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #f9810e}");
-                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-                }else if(catagoryID.equals("11")){
-                    sewrageText.setText("Sewage\n{ic-sewage 27sp #f9810e}");
-                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-                }else if(catagoryID.equals("12")){
-                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #f9810e}");
-                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-                }
+//                typeText.setText(typeName);
+//                typeText.setVisibility(View.VISIBLE);
+//                if(catagoryID.equals("6")){
+//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #f9810e}");
+//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
+//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
+//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
+//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
+//                }else if(catagoryID.equals("8")){
+//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #f9810e}");
+//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
+//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
+//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
+//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
+//                }else if(catagoryID.equals("10")){
+//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #f9810e}");
+//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
+//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
+//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
+//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
+//                }else if(catagoryID.equals("11")){
+//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #f9810e}");
+//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
+//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
+//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
+//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
+//                }else if(catagoryID.equals("12")){
+//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #f9810e}");
+//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
+//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
+//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
+//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
+//                }
 
             }
 
