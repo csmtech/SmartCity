@@ -5,9 +5,10 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.csm.smartcity.R;
+
+import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class RecyclerViewAnnouncementDtlAdapter
     @Override
     public void onBindViewHolder(ListItemViewHolder viewHolder, int position) {
         Model model = items.get(position);
-        viewHolder.txtAnnouncement.setText(String.valueOf(model.txtAnnouncement));
+        viewHolder.txtAnnouncement.setHtmlFromString(String.valueOf(model.txtAnnouncement), new HtmlTextView.RemoteImageGetter());
         /*viewHolder.txtDay.setText(String.valueOf(model.txtDay));*/
         viewHolder.itemView.setActivated(selectedItems.get(position, false));
     }
@@ -48,12 +49,12 @@ public class RecyclerViewAnnouncementDtlAdapter
     }
 
     public final static class ListItemViewHolder extends RecyclerView.ViewHolder {
-        TextView txtAnnouncement;
+        HtmlTextView txtAnnouncement;
 
 
         public ListItemViewHolder(View itemView) {
             super(itemView);
-            txtAnnouncement = (TextView) itemView.findViewById(R.id.txtAnnouncement);
+            txtAnnouncement = (HtmlTextView) itemView.findViewById(R.id.txtAnnouncement);
 
         }
 

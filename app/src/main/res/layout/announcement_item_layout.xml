@@ -34,16 +34,16 @@
                      android:id="@+id/imgUserimage"
                      />-->
 
-                <TextView
+                <org.sufficientlysecure.htmltextview.HtmlTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                     android:id="@+id/txtAnnouncement"
+                    android:id="@+id/txtAnnouncement"
                     android:layout_alignParentTop="true"
                     android:textColor="#000"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
-                    android:textStyle="bold" />
+                    />
 
 
             </RelativeLayout>

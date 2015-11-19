@@ -1,49 +1,61 @@
-package com.csm.smartcity.information;
+package com.csm.smartcity.services;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.csm.smartcity.R;
+
 import com.csm.smartcity.dashboard.NewDashboardActivity;
 
-public class InformationActivity extends AppCompatActivity {
+public class Services extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information);
-        if (Build.VERSION.SDK_INT < 16) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-
+        setContentView(R.layout.activity_services);
     }
     public void onHome(View v)
 
     {
-        startActivity(new Intent(this, NewDashboardActivity.class));
+        startActivity(new Intent(this,  NewDashboardActivity.class));
     }
-    public void onNews(View v)
+    public void onMarriage(View v)
 
     {
-        startActivity(new Intent(this, eVartaActivity.class));
+        startActivity(new Intent(this, MrgCertificateActivity.class));
     }
-    public void onAnnouncement(View v)
+    public void onWater(View v)
 
     {
-        startActivity(new Intent(this, AnnouncementActivity.class));
+        startActivity(new Intent(this, WaterTankerActivity.class));
+    }
+    public void onCesspool(View v)
+
+    {
+        startActivity(new Intent(this, CesspoolVehicleActivity.class));
+    }
+    public void onMahayatra(View v)
+
+    {
+        startActivity(new Intent(this, MahayatraVehicleActivity.class));
+    }
+    public void onYatrinivas(View v)
+
+    {
+        startActivity(new Intent(this, YatriNivasActivity.class));
+    }
+    public void onKalyanMandap(View v)
+
+    {
+        startActivity(new Intent(this,KalyanMandapActivity.class));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_back, menu);
         return true;
     }
