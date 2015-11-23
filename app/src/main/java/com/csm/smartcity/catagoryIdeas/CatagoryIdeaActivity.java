@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.csm.smartcity.R;
 import com.csm.smartcity.adapter.RecycleViewCardAdapter;
+import com.csm.smartcity.model.IdeaDataObject;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
     private ProgressBar progress_connect;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecycleViewCardAdapter mAdapter;
-    private ArrayList<String> catagoryArrayList;
+    private ArrayList<IdeaDataObject> catagoryArrayList;
     String heading="";
 
     @Override
@@ -53,13 +54,13 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        catagoryArrayList=new ArrayList<String>();
-        catagoryArrayList.add("1");
-        catagoryArrayList.add("2");
-        catagoryArrayList.add("3");
-        catagoryArrayList.add("4");
-        catagoryArrayList.add("5");
-        catagoryArrayList.add("6");
+        catagoryArrayList=new ArrayList<IdeaDataObject>();
+//        catagoryArrayList.add("1");
+//        catagoryArrayList.add("2");
+//        catagoryArrayList.add("3");
+//        catagoryArrayList.add("4");
+//        catagoryArrayList.add("5");
+//        catagoryArrayList.add("6");
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -71,7 +72,7 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_catagory_idea, menu);
+        getMenuInflater().inflate(R.menu.menu_back, menu);
         return true;
     }
 
@@ -83,7 +84,7 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.crossicon) {
+        if (id == R.id.regdMenuIcon) {
             finish();
             //overridePendingTransition(R.animator.push_up_in, R.animator.push_up_out);
             return true;

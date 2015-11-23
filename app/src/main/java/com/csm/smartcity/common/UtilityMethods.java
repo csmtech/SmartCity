@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -19,6 +22,8 @@ import com.csm.smartcity.userRegistration.UserRegistrationActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.InputStream;
 
 /**
  * Created by arundhati on 11/13/2015.
@@ -121,6 +126,64 @@ public class UtilityMethods {
             width = (int) (height * bitmapRatio);
         }
         return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+
+    public static String getSentencecaseString(String name){
+        String titleCaseValue=null;
+        try {
+
+
+            String[] words = name.split(" ");
+            StringBuilder sb = new StringBuilder();
+            if (words[0].length() > 0) {
+                sb.append(Character.toUpperCase(words[0].charAt(0)) + words[0].subSequence(1, words[0].length()).toString().toLowerCase());
+                for (int i = 1; i < words.length; i++) {
+                    sb.append(" ");
+                    sb.append(Character.toUpperCase(words[i].charAt(0)) + words[i].subSequence(1, words[i].length()).toString().toLowerCase());
+                }
+            }
+            titleCaseValue= sb.toString();
+
+            //Log.i("STAG",titleCaseValue);
+
+        }catch (StringIndexOutOfBoundsException e){
+            titleCaseValue=name;
+            e.printStackTrace();
+        }catch (Exception e){
+            titleCaseValue=name;
+            e.printStackTrace();
+        }
+        return titleCaseValue;
+    }
+
+
+    /**
+     * Background Async task to load user profile picture from url
+     * */
+    public static class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public LoadProfileImage(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
 }

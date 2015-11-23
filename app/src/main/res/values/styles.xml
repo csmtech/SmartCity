@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/sky</item>
-        <item name="colorPrimaryDark">@color/sky</item>
-        <item name="colorAccent">@color/sky</item>
+        <item name="colorPrimary">@color/colornav</item>
+        <item name="colorPrimaryDark">@color/colornav</item>
+        <item name="colorAccent">@color/colornav</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

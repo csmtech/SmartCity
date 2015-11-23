@@ -45,11 +45,11 @@
                 android:layout_marginTop="10dp">
 
                 <ImageView
-                    android:layout_width="78dp"
-                    android:layout_height="78dp"
+                    android:layout_width="48dp"
+                    android:layout_height="58dp"
                     android:id="@+id/imgUserimage"
                     android:src="@drawable/user"
-                    />
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -81,19 +81,21 @@
                     android:layout_alignParentBottom="false"
                     android:layout_below="@+id/txtCompUser"
                     android:layout_alignLeft="@+id/txtCompUser"
-                    android:layout_alignStart="@+id/txtCompUser" />
+                    android:layout_alignStart="@+id/txtCompUser"
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/txtCompArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:text="CRPF Square Bhubaneswar"
                     android:layout_below="@+id/txtTime"
                     android:textColor="#999999"
                     android:layout_toRightOf="@+id/imgUserimage"
                     android:layout_toEndOf="@+id/imgUserimage"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:textSize="13sp" />
 
             </RelativeLayout>
             <com.joanzapata.iconify.widget.IconTextView
@@ -210,15 +212,17 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="1 Like"
-                    android:id="@+id/txtSupportCount"
-                    android:layout_marginLeft="10dp"/>
+                    android:id="@+id/txtLikeCount"
+                    android:layout_marginLeft="10dp"
+                    android:clickable="true"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="1 Comment"
-                    android:id="@+id/txt_clap_count"
-                    android:layout_marginLeft="10dp"/>
+                    android:id="@+id/txt_comment_count"
+                    android:layout_marginLeft="10dp"
+                    android:clickable="true"/>
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"

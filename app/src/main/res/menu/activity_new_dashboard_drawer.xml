@@ -6,6 +6,12 @@
             android:id="@+id/editProfile"
             android:icon="@drawable/configure"
             android:title="Edit Profile" />
+
+        <item
+            android:id="@+id/champians"
+            android:icon="@drawable/champians"
+            android:title="City Champians" />
+
         <item
             android:id="@+id/appData"
             android:icon="@drawable/savefile"

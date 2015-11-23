@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.joanzapata.iconify.widget.IconButton;
+import com.joanzapata.iconify.widget.IconTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,9 +55,9 @@ import java.util.Map;
 public class LoginActivity extends Activity {
 
     TextView skip;
-    IconButton btnFacebook;
-    IconButton btnGmail;
-    IconButton btnMobile;
+    LinearLayout btnFacebook;
+    LinearLayout btnGmail;
+    LinearLayout btnMobile;
     private CallbackManager callbackManager;      //Declaration of CallbackManager used for facebook login callback
     // Google client to interact with Google API
     private GoogleApiClient mGoogleApiClient;
@@ -71,18 +73,18 @@ public class LoginActivity extends Activity {
         try{
             skip=(TextView)findViewById(R.id.skip);
             skip.setText(Html.fromHtml("<u><b><i>Skip</i></b></u>"));
-            btnFacebook=(IconButton)findViewById(R.id.btnFacebook);
-            btnGmail=(IconButton)findViewById(R.id.btnGmail);
-            btnMobile=(IconButton)findViewById(R.id.btnMobile);
+            btnFacebook=(LinearLayout)findViewById(R.id.btnFacebook);
+            btnGmail=(LinearLayout)findViewById(R.id.btnGmail);
+            btnMobile=(LinearLayout)findViewById(R.id.btnMobile);
 
             btnFacebook.setOnClickListener(facebookBtnClick());
             btnGmail.setOnClickListener(gmailBtnClick());
             btnMobile.setOnClickListener(mobileBtnClick());
             skip.setOnClickListener(skipClick());
              /*
-        * Initilization of facebook sdk on activity create.
-        * Used for facebook login
-        * */
+            * Initilization of facebook sdk on activity create.
+            * Used for facebook login
+            * */
             FacebookSdk.sdkInitialize(getApplicationContext());
 
             //Getting callback manager from factory

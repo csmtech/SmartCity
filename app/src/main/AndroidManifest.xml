@@ -85,6 +85,14 @@
             android:name=".ideaComment.IdeaCommentActivity"
             android:label="@string/title_activity_idea_comment" >
         </activity>
+        <activity
+            android:name=".cityChampians.CityChampiansActivity"
+            android:label="@string/title_activity_city_champians" >
+        </activity>
+        <activity
+            android:name=".userList.UsersActivity"
+            android:label="@string/title_activity_users" >
+        </activity>
     </application>
 
 </manifest>

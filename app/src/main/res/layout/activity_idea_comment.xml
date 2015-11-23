@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.csm.smartcity.ideaComment.IdeaCommentActivity"
-    >
+    tools:context="com.csm.smartcity.ideaComment.IdeaCommentActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/comment_recycler_view"
@@ -42,8 +41,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/location"
-            android:hint="Enter location name"
+            android:id="@+id/commentetxt"
+            android:hint="Write a comment"
             android:textSize="15sp"
             android:paddingLeft="10dp"
             android:layout_weight="1"
@@ -56,7 +55,8 @@
             android:background="@color/white"
             android:layout_alignTop="@+id/complnImage"
             android:text="{fa-paper-plane 25sp #538CD5}"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:id="@+id/postBtn"/>
 </LinearLayout>
 
 

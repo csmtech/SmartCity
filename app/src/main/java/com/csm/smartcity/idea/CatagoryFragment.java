@@ -77,23 +77,11 @@ public class CatagoryFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        catagoryArrayList=new ArrayList<String>();
-//        catagoryArrayList.add("1");
-//        catagoryArrayList.add("2");
-//        catagoryArrayList.add("3");
-//        catagoryArrayList.add("4");
-//        catagoryArrayList.add("5");
-//        catagoryArrayList.add("6");
-//
-//        for(int i=0;i<catagoryArrayList.size();i++){
-//            mRecyclerView.setAccessibilityLiveRegion(R.layout.catagoryList);
-//        }
-//        mLayoutManager = new LinearLayoutManager(getActivity());
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mAdapter = new RecycleViewCardAdapter(catagoryArrayList,mRecyclerView);
-//        mRecyclerView.setAdapter(mAdapter);
+        getCatagoryList();
     }
-//    public void getCatagoryData(View v){
-//        Toast.makeText(getActivity(),"hello",Toast.LENGTH_LONG).show();
-//    }
+
+    private void getCatagoryList(){
+
+    }
+
 }

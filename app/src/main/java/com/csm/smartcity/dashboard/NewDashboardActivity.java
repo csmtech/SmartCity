@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.csm.smartcity.R;
+import com.csm.smartcity.cityChampians.CityChampiansActivity;
 import com.csm.smartcity.common.AppCommon;
 import com.csm.smartcity.common.CircularNetworkImageView;
 import com.csm.smartcity.common.UtilityMethods;
@@ -155,9 +156,7 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
                 imgProfilePic.setImageUrl(imagePath, mImageLoader);
 
             } catch (Exception e) {
-
                 Log.i("atag","hello");
-
                 e.printStackTrace();
             }
 
@@ -220,11 +219,12 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if(id == R.id.editProfile){
-
             Intent actvI = new Intent(NewDashboardActivity.this, UserRegistrationActivity.class);
             actvI.putExtra("mobNo","edit");
             startActivity(actvI);
-
+        }else if (id == R.id.champians) {
+            Intent i = new Intent(NewDashboardActivity.this, CityChampiansActivity.class);
+            startActivity(i);
         }else if (id == R.id.appData) {
             UtilityMethods.getAllData("upd", NewDashboardActivity.this);
             // Handle the camera action
