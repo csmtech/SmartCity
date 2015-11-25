@@ -1,11 +1,13 @@
 package com.csm.smartcity.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -18,25 +20,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.csm.smartcity.R;
 import com.csm.smartcity.common.AppCommon;
 import com.csm.smartcity.common.AppController;
 import com.csm.smartcity.common.ColoredSnackbar;
 import com.csm.smartcity.common.CommonDialogs;
+import com.csm.smartcity.common.CustomNetworkImageView;
+import com.csm.smartcity.common.ShareHelper;
 import com.csm.smartcity.common.UtilityMethods;
+import com.csm.smartcity.connection.CustomVolleyRequestQueue;
 import com.csm.smartcity.ideaComment.IdeaCommentActivity;
 import com.csm.smartcity.model.IdeaDataObject;
 import com.csm.smartcity.userList.UsersActivity;
 import com.joanzapata.iconify.widget.IconTextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 //fa-thumbs-up
 //fa-comments
@@ -45,18 +55,23 @@ import java.util.ArrayList;
  */
 public class RecycleViewCardAdapter extends RecyclerView.Adapter {
     private ArrayList<IdeaDataObject> mDataset;
+    private ImageLoader mImageLoader;
+    Context c;
 
     public RecycleViewCardAdapter(ArrayList<IdeaDataObject> myDataset, RecyclerView recyclerView) {
         mDataset=myDataset;
-        Log.i("atag",mDataset.toString()+":::::::in adapter");
 
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
+        c=parent.getContext();
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_complaint, parent, false);
         vh = new RecentViewHolder(v);
+       // mImageLoader = CustomVolleyRequestQueue.getInstance(parent.getContext()).getImageLoader();
+         mImageLoader = AppController.getInstance().getImageLoader();
+
         return vh;
     }
 
@@ -72,10 +87,52 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
             ((RecentViewHolder)holder).txt_comment_count.setText(mDataset.get(position).getCOMMENT_COUNT() + " Comment");
 
             String userUrl=AppCommon.getUserPhotoURL()+mDataset.get(position).getCITIZEN_IMAGE();
-            String ideaImgUrl=AppCommon.getUserPhotoURL()+mDataset.get(position).getCITIZEN_IMAGE();
-            Log.i("atag", userUrl);
-            new UtilityMethods.LoadProfileImage(((RecentViewHolder)holder).imgUserimage).execute(userUrl);
-            new UtilityMethods.LoadProfileImage(((RecentViewHolder)holder).imgCompImage).execute(userUrl);
+         //   String ideaImgUrl=AppCommon.getUserPhotoURL()+mDataset.get(position).getCITIZEN_IMAGE();
+
+
+           // new UtilityMethods.LoadProfileImage(((RecentViewHolder)holder).imgUserimage).execute(userUrl);
+
+            if(AppCommon.isNetworkAvailability(c)==true) {
+
+                mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgUserimage, R.drawable.complaint, R.drawable.complaint_image_null));
+                ((RecentViewHolder)holder).imgUserimage.setImageUrl(userUrl, mImageLoader);
+
+                 mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
+                ((RecentViewHolder)holder).imgCompImage.setImageUrl(userUrl, mImageLoader);
+            }else {
+                Cache cache = AppController.getInstance().getRequestQueue().getCache();
+                Cache.Entry entry = cache.get(userUrl);
+                if (entry != null) {
+                    try {
+                        String data = new String(entry.data, "UTF-8");
+                        Log.i("atag","arundhati  "+data);
+                        ((RecentViewHolder) holder).imgCompImage.setImageBitmap(UtilityMethods.StringToBitMap(data));
+
+                        ((RecentViewHolder) holder).imgUserimage.setImageBitmap(UtilityMethods.StringToBitMap(data));
+                        //((RecentViewHolder) holder).imgCompImage.
+                    } catch (UnsupportedEncodingException e) {
+
+                        mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgUserimage, R.drawable.complaint, R.drawable.complaint_image_null));
+                        ((RecentViewHolder)holder).imgUserimage.setImageUrl(userUrl, mImageLoader);
+
+                        mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
+                        ((RecentViewHolder)holder).imgCompImage.setImageUrl(userUrl, mImageLoader);
+                        e.printStackTrace();
+                    }
+                } else {
+
+                    mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgUserimage, R.drawable.complaint, R.drawable.complaint_image_null));
+                    ((RecentViewHolder)holder).imgUserimage.setImageUrl(userUrl, mImageLoader);
+
+                    mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
+                    ((RecentViewHolder)holder).imgCompImage.setImageUrl(userUrl, mImageLoader);
+                }
+
+            }
+
+
+
+          //  new UtilityMethods.LoadProfileImage(((RecentViewHolder)holder).imgCompImage).execute(userUrl);
 
            /*Support Complaint Click*/
             ((RecentViewHolder) holder).layoutLike.setOnClickListener(likeOnclickListener(mDataset.get(position).getIDEA_ID()));
@@ -106,8 +163,8 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
         TextView txtSupportIcon;
         TextView txtShareIcon;
         TextView txtInviteIcon;
-        ImageView imgUserimage;
-        ImageView imgCompImage;
+        CustomNetworkImageView imgUserimage;
+        CustomNetworkImageView imgCompImage;
         LinearLayout layoutShare;
         LinearLayout layoutLike;
         LinearLayout layoutComment;
@@ -140,8 +197,8 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
             txtUpdatedBy = (TextView) itemView.findViewById(R.id.txt_updated_by);
             txtUpdatedOn = (TextView) itemView.findViewById(R.id.txt_updated_on);
             txtResolvedRemark = (TextView) itemView.findViewById(R.id.txt_resolve_remark);
-            imgUserimage=(ImageView)itemView.findViewById(R.id.imgUserimage);
-            imgCompImage=(ImageView)itemView.findViewById(R.id.imgCompImage);
+            imgUserimage=(CustomNetworkImageView)itemView.findViewById(R.id.imgUserimage);
+            imgCompImage=(CustomNetworkImageView)itemView.findViewById(R.id.imgCompImage);
         }
 
     }
@@ -159,7 +216,6 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
 
                         //final String strSupportFlag = (complaint.getSUPPORT_STATUS().equals("N")) ? "0" : "1";
                         String url = AppCommon.getURL() + "IdeaLikeCall/" + AppCommon.getLoginPrefData(v.getContext()).getCITIZEN_ID() + "/" +id;
-                        Log.i("atag",url);
                         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                                 url, null,
                                 new Response.Listener<JSONObject>() {

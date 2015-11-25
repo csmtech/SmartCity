@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#E6E6E6"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:gravity="center">
 
     <ProgressBar
         android:layout_width="match_parent"
@@ -26,4 +27,40 @@
             android:scrollbars="vertical"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/networkUnavailable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="{ic-sad 70dp #8C8989}"
+            android:id="@+id/batchIcon"
+            android:textColor="#8C8989"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Can't Connect"
+            android:id="@+id/textView16"
+            android:textColor="#8C8989"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Please swipe top to refresh"
+            android:id="@+id/textView15"
+            android:textColor="#8C8989"/>
+
+
+    </LinearLayout>
+</RelativeLayout>

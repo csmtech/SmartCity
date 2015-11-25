@@ -2,221 +2,179 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-   <!-- <LinearLayout style="@style/TitleServiceBar"
-        android:id="@+id/layout1">
-
-        <ImageView style="@style/TitleBarLogo"
-            android:id="@+id/img1"
-            android:src="@drawable/service"
-
-            android:layout_marginTop = "5dip"
-            android:layout_marginRight="5dip"
-            android:layout_marginLeft="5dip"
-            android:layout_marginBottom = "5dip"
-            android:paddingBottom = "5dip"
-            android:background="#673AB7"
-            android:layout_gravity="center"
-            android:paddingLeft="5dip"
-            android:paddingRight="7dip" />
-
-        <ImageView android:layout_width="1px"
-            android:layout_height="fill_parent"
-            android:id="@+id/sep"
-            android:background="@drawable/separator"
-            android:layout_marginRight="7dip"
-            />
-
-        <TextView style="@style/TitleBarText"
-            android:id="@+id/tv1"
-            android:paddingLeft = "8dip"
-            android:text="Services"/>
-        <ImageView android:layout_width="1px"
-            android:layout_height="fill_parent"
-            android:id="@+id/sepa"
-            android:background="@drawable/separator"
-            android:layout_marginRight="7dip"
-            />
-        <ImageView style="@style/TitleBarLogo"
-            android:id="@+id/img2"
-            android:src="@drawable/options27"
-            android:onClick="onHome"
-            android:layout_marginTop = "5dip"
-            android:layout_marginRight="5dip"
-            android:layout_marginLeft="5dip"
-            android:layout_marginBottom = "5dip"
-            android:paddingBottom = "5dip"
-            android:background="#673AB7"
-            android:layout_gravity="center"
-            android:paddingLeft="5dip"
-
-            android:paddingRight="7dip" />
-    </LinearLayout>-->
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-
-        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
         android:padding="6dip">
 
-        <LinearLayout style="@style/ActivityBody"
-            android:layout_weight="0">
+        <LinearLayout
+            style="@style/ActivityBody"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:layout_marginBottom="40dip"
-                android:paddingRight="30dip"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="30dip">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/mrg"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mrg"
                     android:onClick="onMarriage"
-
                     android:src="@drawable/marriage" />
 
-                <TextView style="@style/ServiceText"
+                <TextView
                     android:id="@+id/mrgTxt"
-                    android:text="Marriage Certificate"
-                    android:layout_marginTop="10dip"/>
+                    style="@style/ServiceText"
+                    android:layout_marginTop="10dip"
+                    android:text="Marriage Certificate" />
 
             </LinearLayout>
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:layout_marginBottom="40dip"
-                android:paddingRight="30dip"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="30dip">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/cesspool"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cesspool"
                     android:onClick="onCesspool"
 
                     android:src="@drawable/vehicle1" />
 
-                <TextView style="@style/ServiceText"
+                <TextView
                     android:id="@+id/vehicle"
-                    android:text="Cesspool Vehicle"
-                    android:layout_marginTop="10dip"/>
+                    style="@style/ServiceText"
+                    android:layout_marginTop="10dip"
+                    android:text="Cesspool Vehicle" />
 
             </LinearLayout>
 
 
         </LinearLayout>
 
-        <LinearLayout style="@style/ActivityBody"
-            android:layout_weight="0">
+        <LinearLayout
+            style="@style/ActivityBody"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0.5dip"
-                android:layout_marginBottom="40dip"
-                android:paddingRight="30dip"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="30dip">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/waterImg"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/waterImg"
                     android:onClick="onWater"
 
                     android:src="@drawable/water" />
 
-                <TextView style="@style/ServiceText"
+                <TextView
                     android:id="@+id/waterTxt"
-                    android:text="Water Tanker"
-                    android:layout_marginTop="10dip"/>
+                    style="@style/ServiceText"
+
+                    android:text="Water Tanker" />
 
             </LinearLayout>
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0.5dip"
-                android:layout_marginBottom="40dip"
-                android:paddingRight="30dip"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="30dip">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/mahaYatra"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mahaYatra"
                     android:onClick="onMahayatra"
 
                     android:src="@drawable/mahayatra" />
 
-                <TextView style="@style/ServiceText"
+                <TextView
                     android:id="@+id/mahayatraVehicle"
-                    android:text="Mahayatra Vehicle"
-                    android:layout_marginTop="10dip"/>
+                    style="@style/ServiceText"
+                    android:text="Mahayatra Vehicle" />
 
             </LinearLayout>
 
 
         </LinearLayout>
 
-        <LinearLayout style="@style/ActivityBody"
-            android:layout_weight="0">
+        <LinearLayout
+            style="@style/ActivityBody"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0.5dip"
-                android:layout_marginBottom="40dip"
-                android:paddingRight="30dip"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="30dip">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/YatriImg"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/YatriImg"
                     android:onClick="onYatrinivas"
 
                     android:src="@drawable/yatrinivas" />
 
-                <TextView style="@style/ServiceText"
+                <TextView
                     android:id="@+id/yatriTxt"
-                    android:text="Yatri Nivas"
-                    android:layout_marginTop="10dip"/>
+                    style="@style/ServiceText"
+                    android:layout_marginTop="10dip"
+                    android:text="Yatri Nivas" />
 
             </LinearLayout>
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0.5dip"
-                android:layout_marginBottom="40dip"
-                android:paddingRight="30dip"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="30dip">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/kalyanMandap"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/kalyanMandap"
                     android:onClick="onKalyanMandap"
 
                     android:src="@drawable/house99" />
 
-                <TextView style="@style/ServiceText"
+                <TextView
                     android:id="@+id/mandap"
-                    android:text="Kalyan Mandap"
-                    android:layout_marginTop="10dip"/>
+                    style="@style/ServiceText"
+                    android:layout_marginTop="10dip"
+                    android:text="Kalyan Mandap" />
 
             </LinearLayout>
 
@@ -224,5 +182,6 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </LinearLayout>

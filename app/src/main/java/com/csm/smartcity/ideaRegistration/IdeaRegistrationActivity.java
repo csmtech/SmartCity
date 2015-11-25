@@ -88,8 +88,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
     IconButton txtCitizens;//For Drinking Water.tag-10
     IconButton txtTown;//For Sewage.tag-11
     IconButton txtOthers;//For Miscellaneous Grievance.tag-12
-    //Declaration of type text which shows complaint typeof complaint catagory in orange color background
-  //  TextView typeText;
     //Declaration of complaint detail edit text view for complaint registration
     EditText complnDtl;
     //char length for complaint detail character count
@@ -100,65 +98,25 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
     ImageView complnImage; //Image view to show image button
     IconButton crossBtn;   //cross btn on right top corner to close image view
     LinearLayout tableView; //Table view used to hide table layout and show complaint image when image is selected/taken.
-    //TextView roundOr; //or text view use to hide this when complait image is selected/ taken
-    // Declaration of auto complete text view for complaint location
-  //  AutoCompleteTextView location;
-    //Declaration of land mark text view for complaint landmark
-   // EditText landmark;
     //Declaration of complaint post button
     IconButton complnpost;
-    /*
-    * Component of word area pop view
-    * */
-    Spinner wordspinner; //word spinner/drop down for word data
-    Spinner areaspinner; //area spinner/drop down for area data
-    Button okBtn;        //Ok button of popup
-    IconButton crossareaBtn; //cross button of popup
-    /*
-    * Declaration of object variables
-    * */
-    private PopupWindow pwindo; // Declaration of popup window for word area popup
-    LayoutInflater inflater; // LayoutInflater to manipulate custom popup
-    View layout; // declaring pop view
-    ArrayList<String> wordList; //Declaraton of array list for ward data from sqllite
-    ArrayList<String> areaList; //Declaraton of array list for area data from sqllite
-    JSONArray wordDBData; // declaration of wordDBData to store word data retrieving from sqllite db
-    JSONArray areaDBData;// declaration of areaDBData to store area data retrieving from sqllite db
-   // GPSTracker gps; //Declaration of gps tracker object
+
     LoginUserObject objLogin; // LoginUserObject is a pojo object of  citizen details contains getter setter
-    List<ControllData> cntrlData; // Declaration of controll db data list
-    ArrayAdapter<String> wordadapter; // Declaration of array adapter for ward spinner
-    ArrayList<String> autoCompleteArrList; // Declaration of array list for auto complete text view
-    ArrayAdapter autoCompleteAdapter;  // Declaration of array adapter for location auto complete text view
     /*
     * Declaration of string variables
     * */
     final String tag_json_obj = "obj_complnRegd"; //variable to store valley queue request name
     String catagoryID="0"; //variable to store catagory id for DB
-    String typeID="0"; //variable to store type id for DB
-    String typeName="";//variable to store typename return from TypePopupActivity to show in type text
     String encodedImage="";//variable to store byte code of complaint image
     String imgDecodableString; // to store complaint image path in choose from gallery
-    String wordID=""; //variable declaration to store word id for DB
-    String areaID="";//variable declaration to store area id for DB
-    String googleAreaName="";//variable declaration to store google Area
-    String deviceBackFlag=""; //variable to store a flag for device back click
-    String reopen="0"; //variable to store flag for complaint registration or reopen
-    String areaName="";// Variable to store area name to fill into location auto complete text view
-    String wardName="";// Variable to store area name to fill into location auto complete text view
-
+    String userId="0";
     /*
     * Declaration of int variables
     * */
     private static int RESULT_LOAD_IMG = 2; //variable for start activity on result request code to load image from gallery
     private static int REQUEST_CAMERA=1; //variable for start activity on result request code to open camera
-    private static int OPEN_TYPEPOPUP=3;//variable for start activity on result request code to open type popup
-    int width; //variable to store device width
-    int height; //variable to store device height
 
     DonutProgress pb;
-    private long totalSize;
-    private Uri fileUri;
     IconButton upload;
     IconButton retry;
     Bitmap bm1;
@@ -166,12 +124,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
     String imgStatus="No";
     RelativeLayout layoutImageUpload;
 
-    private String latitude="";
-    private String longitude="";
-
-   // private IconButton btn_edit_loc;
-   // private IconButton btn_select_area;
-    ViewGroup viewGroup;
     private String uploadStatus="false";
     private boolean uploadCancelStatus=false;
     Bitmap bm;
@@ -184,7 +136,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         //Used to set XML view to this activity/context
         setContentView(R.layout.activity_idea_registration);
         pb = (DonutProgress) findViewById(R.id.progressBar);
-        viewGroup = ((ViewGroup) this.findViewById(android.R.id.content));
         //Getting all catagory icon button from xml by its id.
         txtTransport=(IconButton)findViewById(R.id.txtTransport);
         txtWaste=(IconButton)findViewById(R.id.txtWaste);
@@ -196,15 +147,12 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         * Initially it is hidden
         * After selecting complaint type it shown in orange color background text view
         * */
-//        typeText=(TextView)findViewById(R.id.typeText);
-//        typeText.setVisibility(View.GONE); //Initially it is hidden
         complnDtl=(EditText)findViewById(R.id.complnDtl); //Getting complaint detail edit text component
         charLength=(TextView)findViewById(R.id.charLength); //Getting complaint detail char length text view component
         /*
         * Components of complaint image
         * */
         complnImage=(ImageView)findViewById(R.id.complnImage); //Getting complaint iamge component
-        // complnImage.setVisibility(View.INVISIBLE);//Initially complaint image is hidden
         crossBtn=(IconButton)findViewById(R.id.crossBtn);//Getting cross button component of complaint iamge
         crossBtn.setVisibility(View.INVISIBLE);//Initially it is hidden
 
@@ -214,145 +162,16 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         layoutImageUpload=(RelativeLayout) findViewById(R.id.layoutImageUpload);
 
         tableView=(LinearLayout)findViewById(R.id.tableView); //Getting table view of complaint image
-       // roundOr = (TextView)findViewById(R.id.roundOr); //Getting round or text view
-       // location= (AutoCompleteTextView) findViewById(R.id.location);// getting location auto complete text view
-       // landmark = (EditText)findViewById(R.id.landmark); //Getting landmark
         complnpost=(IconButton)findViewById(R.id.complnpost);//Getting complaint post button from its id
-
-
-       // btn_edit_loc =(IconButton)findViewById(R.id.btn_edit_loc) ; //Getting Button Edit Location
-       // btn_select_area=(IconButton)findViewById(R.id.btn_select_area);  //Getting Button Select Area
-
-       /*
-        * Initialization of all object variables
-        * */
-//        inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE); // Initiation of layout inflater
-//        layout = inflater.inflate(R.layout.word_area_select,(ViewGroup) findViewById(R.id.popup_element)); // Initiation of view object
-         /*
-        * Components of word area custom popup retrieved from custom view(layout) object
-        * */
-//        wordspinner = (Spinner)layout.findViewById(R.id.wordSpnr) ; //ward drop down
-//        areaspinner = (Spinner)layout.findViewById(R.id.areaSpnr) ; //area drop down
-//        okBtn = (Button)layout.findViewById(R.id.okBtn) ; //ok button of pop up
-//        crossareaBtn = (IconButton)layout.findViewById(R.id.crossareaBtn) ; //cross button of pop up
-
-
-//        objLogin = AppCommon.getLoginPrefData(this);   // Getting login user details
-        DatabaseHandler db=new DatabaseHandler(this);  //initiation of DatabaseHandler class
-//        //Initialization of array list string type
-//        wordList = new ArrayList<String>();// Initiation of ward list
-//        areaList = new ArrayList<String>();// Initiation of area list
-        //Getting all word area data from SQLLite  from DatabaseHandler class
-       // cntrlData = db.getAllContollData("1,2");
-        //Handling JSON exception
-//        try {
-//            wordDBData=new JSONArray(cntrlData.get(1).getDataValue());
-//            areaDBData=new JSONArray(cntrlData.get(0).getDataValue());
-//            wordList.add("-- Select ward --");
-//            for(int i=0;i<wordDBData.length();i++){
-//                wordList.add(wordDBData.getJSONObject(i).get("Name").toString());
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        //initialization of array adepter to fill word list in wora drop down
-//        wordadapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item,wordList);
-//        wordadapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-//        wordspinner.setAdapter(wordadapter); // this will set list of values to spinner
-//        wordspinner.setSelection(wordList.indexOf(0));
-//        // Adding on item selection listener to ward spinner
-//        wordspinner.setOnItemSelectedListener(wordClick());
-//        // Adding on item selection listener to area spinner
-//        areaspinner.setOnItemSelectedListener(areaClick());
-//        //Adding area data to auto complete text view
-//        autoCompleteArrList = new ArrayList<String>();
-//        try {
-//            for(int i=0;i<areaDBData.length();i++){
-//                String areaName=areaDBData.getJSONObject(i).get("Name").toString();
-//                String wardId=areaDBData.getJSONObject(i).get("WARD_ID").toString();
-//
-//                for(int j=0;j<wordDBData.length();j++){
-//                    if( wardId.equals(wordDBData.getJSONObject(j).get("ID").toString())){
-//                        autoCompleteArrList.add(areaName+","+wordDBData.getJSONObject(j).get("Name").toString());
-//                    }
-//                }
-//            }
-//            //Adepter for auto complete text view
-//            autoCompleteAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,autoCompleteArrList);
-//            location.setAdapter(autoCompleteAdapter); //Setting array adapter to auto complete text view
-//            location.setThreshold(1);  //setting Threshold to open list by input a single letter
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        setLocation();
-
-        // Adding on item selection listener to area auto complete text view list
-//        location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//                String areaName = arg0.getItemAtPosition(arg2).toString();
-//                String[] strArr=areaName.split(",");
-//                btn_edit_loc.setVisibility(View.VISIBLE);
-//                btn_select_area.setVisibility(View.GONE);
-//                try {
-//                    for (int i = 0; i < areaDBData.length(); i++) {
-//                        if (strArr[0].equals(areaDBData.getJSONObject(i).get("Name").toString())) {
-//                            areaID = areaDBData.getJSONObject(i).get("ID").toString();
-//                            wordID = areaDBData.getJSONObject(i).get("WARD_ID").toString();
-//                            break;
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
-        //declaration and intialization of Display object to get window width and height
-//        Display display= ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-//        width = display.getWidth();
-//        height = display.getHeight();
-
-        //OnClickListener to pop up ok button
-//        okBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                deviceBackFlag="";
-//                String wordName = wordspinner.getSelectedItem().toString();
-//                String areaName = areaspinner.getSelectedItem().toString();
-//                if(wordName.equals("-- Select ward --")){
-//                    AppCommon.showCustomToast(ComplaintRegdActivity.this, "Please select ward");
-//                }else if(areaName.equals("-- Select area --")){
-//                    AppCommon.showCustomToast(ComplaintRegdActivity.this,"Please select area");
-//                }else {
-//                    location.setText(areaName+","+wordName);
-//                    location.setSelection(location.getText().length());
-//                    btn_edit_loc.setVisibility(View.VISIBLE);
-//                    btn_select_area.setVisibility(View.GONE);
-//                    deviceBackFlag="";
-//                    pwindo.dismiss();
-//                }
-//            }
-//        });
-        //OnClickListener to pop up cross button
-//        crossareaBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                deviceBackFlag="";
-//                pwindo.dismiss();
-//            }
-//        });
         // Getting login user details
-        objLogin = AppCommon.getLoginPrefData(this);
-
-
-       /*Fetch GPS and Set Location*/
-  //      fetchLocation();
-
-
-
-
+        if (AppCommon.isLogin(this)) {
+            objLogin = AppCommon.getLoginPrefData(this);
+            userId=objLogin.getCITIZEN_ID();
+        }else{
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Please login to post your idea.", Snackbar.LENGTH_LONG);
+            ColoredSnackbar.confirm(snackbar).show();
+        }
+        //COMPLAIN DETAIL EDIT TEXT FIELD TEXT CHANGE LISTENER
         complnDtl.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -369,15 +188,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
-
-              /*  if (s.toString().startsWith(" ")) {
-                    complnDtl.setText("");
-                }else if(s.toString().)
-                else {
-                    //enableButton(...)
-                }*/
-
             }
 
             @Override
@@ -386,67 +196,12 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                 charLength.setText(cnt + " characters");
             }
         });
-
-
-//        landmark.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                for(String x:char_spec){
-//                    if (s.toString().startsWith(x)) {
-//                        landmark.setText("");
-//                        break;
-//                    }
-//                }
-//            }
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//        });
         //Adding on click listener to complaint post button
-       // complnpost.setOnClickListener(registerComplaint());
+        complnpost.setOnClickListener(registerComplaint());
 
 
     }
-//    public void setLocation(){
-//        wordID=objLogin.getWARD_ID(); //Getting ward id of login user
-//        areaID= objLogin.getAREA_ID(); //Getting area id of login user
-//        try {
-//            for (int i = 0; i < areaDBData.length(); i++) {
-//                if (areaID.equals(areaDBData.getJSONObject(i).get("ID").toString())) {
-//                    areaName = areaDBData.getJSONObject(i).get("Name").toString();
-//                    break;
-//                }
-//            }
-//            for (int i = 0; i < wordDBData.length(); i++) {
-//                if (wordID.equals(wordDBData.getJSONObject(i).get("ID").toString())) {
-//                    wardName = wordDBData.getJSONObject(i).get("Name").toString();
-//                    break;
-//                }
-//            }
-//            location.setText(areaName+","+wardName);
-//            location.setSelection(location.getText().length());
-//            btn_edit_loc.setVisibility(View.VISIBLE);
-//            btn_select_area.setVisibility(View.GONE);
-//
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
-//    @Override
-//    public void onBackPressed() {
-//        if(deviceBackFlag.equals("popup")){
-//            deviceBackFlag="";
-//            pwindo.dismiss();
-//        }else{
-//            super.onBackPressed();
-//        }
-//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -460,13 +215,11 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.regdMenuIcon) {
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -535,20 +288,13 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
 
         imgStatus="No";
 
-
-
-
-
-
-//        if(uploadStatus.equals("true"))
-//            new photoUploadTask(AppCommon.getComplaintImgHandlrUrl(), "fgf", "rtrt", fstrm,lengthbmp).cancel(true);
     }
 
     //Click method of catagory box click
     public void openPopup(View v){
         catagoryID=v.getTag().toString();//Getting catagory id from XML tag attribute
 
-               if(catagoryID.equals("6")){
+               if(catagoryID.equals("1")){
                    txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #E36C09}");
                    txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
                    txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
@@ -560,7 +306,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                    txtCitizens.setTextColor(Color.parseColor("#606060"));
                    txtTown.setTextColor(Color.parseColor("#606060"));
                    txtOthers.setTextColor(Color.parseColor("#606060"));
-                }else if(catagoryID.equals("8")){
+                }else if(catagoryID.equals("2")){
                    txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
                    txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #E36C09}");
                    txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
@@ -572,7 +318,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                    txtCitizens.setTextColor(Color.parseColor("#606060"));
                    txtTown.setTextColor(Color.parseColor("#606060"));
                    txtOthers.setTextColor(Color.parseColor("#606060"));
-                }else if(catagoryID.equals("10")){
+                }else if(catagoryID.equals("3")){
                    txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
                    txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
                    txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #E36C09}");
@@ -584,7 +330,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                    txtCitizens.setTextColor(Color.parseColor("#E36C09"));
                    txtTown.setTextColor(Color.parseColor("#606060"));
                    txtOthers.setTextColor(Color.parseColor("#606060"));
-                }else if(catagoryID.equals("11")){
+                }else if(catagoryID.equals("4")){
                    txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
                    txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
                    txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
@@ -596,7 +342,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                    txtCitizens.setTextColor(Color.parseColor("#606060"));
                    txtTown.setTextColor(Color.parseColor("#E36C09"));
                    txtOthers.setTextColor(Color.parseColor("#606060"));
-                }else if(catagoryID.equals("12")){
+                }else if(catagoryID.equals("5")){
                    txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
                    txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
                    txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
@@ -609,18 +355,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                    txtTown.setTextColor(Color.parseColor("#606060"));
                    txtOthers.setTextColor(Color.parseColor("#E36C09"));
                 }
-
-
-
-
-//        //Opening type pop up activity
-//        Intent popup=new Intent(this, TypePopUpActivity.class);
-//        popup.putExtra("CatagoryId", catagoryID);
-//        startActivityForResult(popup, OPEN_TYPEPOPUP);
-//        //Adding transition animation to open the page
-//        overridePendingTransition(R.animator.push_up_in, R.animator.push_up_out);
-
-
     }
 
     public void takePhoto(View v) {
@@ -633,64 +367,12 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select File"), RESULT_LOAD_IMG);
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
-
-    public String getRealPathFromURI(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
-    }
-    public void retry(View v) {
-        uploadPhoto();
-    }
-    public void uploadPhoto() {
-        retry.setVisibility(View.GONE);
-        upload.setVisibility(View.GONE);
-        pb.setVisibility(View.VISIBLE);
-        pb.setProgress(0);
-        crossBtn.setVisibility(View.VISIBLE);
-        //imgView.setAlpha((float)0.2);
-        //pb.setMax((int)lengthbmp);
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    Uri tempUri = getImageUri(getApplicationContext(), bm1);
-                    FileInputStream fstrm = new FileInputStream(getRealPathFromURI(tempUri));
-
-                    // Set your server page url (and the file title/description)
-                    // HttpFileUpload hfu = new HttpFileUpload(URL2, "my file title","my file description");
-
-                    //hfu.Send_Now(fstrm);
-                    new photoUploadTask(AppCommon.getComplaintImgHandlrUrl(), "fgf", "rtrt", fstrm,lengthbmp).execute();
-
-                } catch (Exception e) {
-                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.INTERNET_UNAVAILABLE, Snackbar.LENGTH_LONG);
-                    ColoredSnackbar.confirm(snackbar).show();
-                    complnImage.setAlpha((float) 1.0);
-                    retry.setVisibility(View.VISIBLE);
-
-                }
-            }
-        });
-
-        thread.start();
-        tableView.setVisibility(View.GONE);
-        // roundOr.setVisibility(View.INVISIBLE);
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         byte[] b;
         try {
-            //capture activity result
             //Toast.makeText(this,requestCode+":::"+resultCode+":::"+data , Toast.LENGTH_LONG).show();
             if (requestCode==1 && resultCode == RESULT_OK && data!=null) {
                 complnImage.setAlpha((float) 0.0);
@@ -761,52 +443,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
 //                crossBtn.setVisibility(View.VISIBLE);
 //                complnImage.setVisibility(View.VISIBLE);
 
-            }
-            else if(requestCode==3 && data!=null) {
-                typeName=data.getStringExtra("typeName");
-                typeID=data.getStringExtra("typeId");
-//                typeText.setText(typeName);
-//                typeText.setVisibility(View.VISIBLE);
-//                if(catagoryID.equals("6")){
-//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #f9810e}");
-//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-//                }else if(catagoryID.equals("8")){
-//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #f9810e}");
-//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-//                }else if(catagoryID.equals("10")){
-//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #f9810e}");
-//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-//                }else if(catagoryID.equals("11")){
-//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #f9810e}");
-//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #606060}");
-//                }else if(catagoryID.equals("12")){
-//                    micselnousText.setText("Misc. Grievance\n{fa-envelope-o 30sp #f9810e}");
-//                    solidtext.setText("Solid Waste Mgmt.\n{fa-trash 30sp #606060}");
-//                    streetText.setText("Street Light\n{fa-lightbulb-o 30sp #606060}");
-//                    watrText.setText("Drinking Water\n{ic-drinkingwater 27sp #606060}");
-//                    sewrageText.setText("Sewage\n{ic-sewage 27sp #606060}");
-//                }
-
-            }
-
-            /*Fetch Location After Back from the Setting Window*/
-//            else if(requestCode==11){
-//                fetchLocation();
-//            }
-
-            else{
+            }else{
                 if(requestCode==3)
                     Toast.makeText(this, "You haven't picked any complaint type. ", Toast.LENGTH_LONG).show();
                 else
@@ -816,278 +453,146 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
 
     }
 
+    public void uploadPhoto() {
+        retry.setVisibility(View.GONE);
+        upload.setVisibility(View.GONE);
+        pb.setVisibility(View.VISIBLE);
+        pb.setProgress(0);
+        crossBtn.setVisibility(View.VISIBLE);
+        //imgView.setAlpha((float)0.2);
+        //pb.setMax((int)lengthbmp);
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    Uri tempUri = getImageUri(getApplicationContext(), bm1);
+                    FileInputStream fstrm = new FileInputStream(getRealPathFromURI(tempUri));
 
-    //wordClick method to return OnItemSelectedListener
-//    public AdapterView.OnItemSelectedListener wordClick(){
-//        return new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                wordID = "";
-//                String wordName = wordspinner.getSelectedItem().toString();
-//                try {
-//                    for (int i = 0; i < wordDBData.length(); i++) {
-//                        String wordData = wordDBData.getJSONObject(i).get("Name").toString();
-//                        if (wordData.equals(wordName)) {
-//                            wordID = wordDBData.getJSONObject(i).get("ID").toString();
-//                            break;
-//                        }
-//                    }
-//                    //adding area list of corresponding word to area spinner
-//                    areaList.clear();
-//                    areaList.add("-- Select area --");
-//                    areaspinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areaList));
-//                    for (int i = 0; i < areaDBData.length(); i++) {
-//                        String areawordID = areaDBData.getJSONObject(i).get("WARD_ID").toString();
-//                        if (areawordID.equals(wordID)) {
-//                            areaList.add(areaDBData.getJSONObject(i).get("Name").toString());
-//                        }
-//                    }
-//
-//                    ArrayAdapter<String> areaadapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, areaList);
-//                    areaadapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-//                    areaspinner.setAdapter(areaadapter); // this will set list of values to spinner
-//                    areaspinner.setSelection(areaList.indexOf(0));
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        };
-//    }
-    //areaClick method to return OnItemSelectedListener
-//    public AdapterView.OnItemSelectedListener areaClick(){
-//        return new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String areaName = areaspinner.getSelectedItem().toString();
-//
-//                try {
-//                    for (int i = 0; i < areaDBData.length(); i++) {
-//                        String areaData = areaDBData.getJSONObject(i).get("Name").toString();
-//                        if (areaData.equals(areaName)) {
-//                            areaID = areaDBData.getJSONObject(i).get("ID").toString();
-//                            break;
-//                        }
-//                    }
-//                } catch (Exception e) {
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        };
-//    }
+                    new photoUploadTask(AppCommon.getComplaintImgHandlrUrl(), "fgf", "rtrt", fstrm,lengthbmp).execute();
 
-    //area selection green button click to select word and area
-//    public void areaPopup(View v){
-//        deviceBackFlag="popup";
-//        initiatePopupWindow();
-//    }
+                } catch (Exception e) {
+                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.INTERNET_UNAVAILABLE, Snackbar.LENGTH_LONG);
+                    ColoredSnackbar.confirm(snackbar).show();
+                    complnImage.setAlpha((float) 1.0);
+                    retry.setVisibility(View.VISIBLE);
 
-    /*Edit Location Option */
-//    public void editLocation(View v){
-//        btn_edit_loc.setVisibility(View.GONE);
-//        btn_select_area.setVisibility(View.VISIBLE);
-//        location.setText("");
-//    }
+                }
+            }
+        });
 
+        thread.start();
+        tableView.setVisibility(View.GONE);
+        // roundOr.setVisibility(View.INVISIBLE);
+    }
 
-    //initiatePopupWindow to open inflate layout popup
-//    private void initiatePopupWindow() {
-//        try {
-//            pwindo = new PopupWindow(layout, width, height, false);
-//            pwindo.showAtLocation(layout, Gravity.NO_GRAVITY, 0, 0);
-//        } catch (Exception e) { }
-//    }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
+    public void retry(View v) {
+        uploadPhoto();
+    }
+
     // method to validate complaint registration page
     public boolean isValid(){
-      //  String landMarkText = landmark.getText().toString();
         String complnDtlText = complnDtl.getText().toString();
-       // String loctn=location.getText().toString();
         if (imgStatus.equals("Inprocess")) {
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please Wait image is uploading", Snackbar.LENGTH_LONG);
             ColoredSnackbar.alert(snackbar).show();
             //Toast.makeText(ComplaintRegdActivity.this, "Please Wait image is uploading", Toast.LENGTH_LONG).show();
             return false;
-        }else if (catagoryID.equals("0") || catagoryID.equals("")) {
+        } else if (userId.equals("0")) {
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please login to post ideas.", Snackbar.LENGTH_LONG);
+            ColoredSnackbar.alert(snackbar).show();
+            //Toast.makeText(ComplaintRegdActivity.this, "Please Wait image is uploading", Toast.LENGTH_LONG).show();
+            return false;
+        }else if (catagoryID.equals("0")) {
             // Toast.makeText(ComplaintRegdActivity.this, "Please select complaint catagory", Toast.LENGTH_LONG).show();
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please select complaint catagory", Snackbar.LENGTH_LONG);
-            ColoredSnackbar.alert(snackbar).show();
-            return false;
-        }
-       /* else if (imgStatus.equals("Inprocess")) {
-            //Toast.makeText(ComplaintRegdActivity.this, "Please select complaint type", Toast.LENGTH_LONG).show();
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please select complaint type", Snackbar.LENGTH_LONG);
-            ColoredSnackbar.alert(snackbar).show();
-            return false;
-        }*/
-        else if (typeID.equals("0") || typeID.equals("")) {
-            // Toast.makeText(ComplaintRegdActivity.this, "Please select complaint type", Toast.LENGTH_LONG).show();
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please select complaint category", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please select idea catagory", Snackbar.LENGTH_LONG);
             ColoredSnackbar.alert(snackbar).show();
             return false;
         } else if (complnDtlText.equals("")) {
             //Toast.makeText(ComplaintRegdActivity.this, "Complaint detail can't be left blank", Toast.LENGTH_LONG).show();
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Complaint detail can't be left blank", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"ideas description field can't be left blank", Snackbar.LENGTH_LONG);
             ColoredSnackbar.alert(snackbar).show();
             complnDtl.requestFocus();
             return false;
         }
-//        else if (landMarkText.equals("")) {
-//            //Toast.makeText(ComplaintRegdActivity.this, "Landmark can't be left blank", Toast.LENGTH_LONG).show();
-//            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Landmark can't be left blank", Snackbar.LENGTH_LONG);
-//            ColoredSnackbar.alert(snackbar).show();
-//            landmark.requestFocus();
-//            return false;
-//        } else if(loctn.equals("")){
-//            // Toast.makeText(ComplaintRegdActivity.this, "Please enter your location.", Toast.LENGTH_LONG).show();
-//            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please enter your location.", Snackbar.LENGTH_LONG);
-//            ColoredSnackbar.alert(snackbar).show();
-//            return false;
-//        }
-
         return true;
     }
     //registerComplaint method to return OnClickListener for post complaint
-//    public View.OnClickListener registerComplaint(){
-//        return new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (isValid()) {
-//                    String dbWordID;
-//                    String dbAreaID;
-//                    String name = objLogin.getUSER_NAME();
-//                    String mobNo = objLogin.getMOBILENO();
-//                    String citizenid = objLogin.getCITIZEN_ID();
-//                    String landMarkText = landmark.getText().toString(); //Getting landmark from landmark edit text field
-//                    String complnDtlText = complnDtl.getText().toString();//Getting complaint detail from landmark edit text field
-//                    /*
-//                    * Condition if complaint from user's own area
-//                    * */
-//                    //condition for getting lat long for complaint location
-//                   /* if(gps.canGetLocation()){
-//                        latitude = String.valueOf(gps.getLatitude());
-//                        longitude = String.valueOf(gps.getLongitude());
-//                        // Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-//                    }*/
-//                   /* Log.i("STAG", "file name==="+imgStatus+"::::::::reopen=" + reopen + ":::name=" + name + ":::mob no=" + mobNo + ":::word id=" + wordID + ":::catagory id="
-//                            + catagoryID + ":::type id=" + typeID + ":::area id=" + areaID + ":::landmark=" + landMarkText + ":::complaint text="
-//                            + complnDtlText + ":::encoded img=" + encodedImage + ":::citizen id=" + citizenid + ":::Lat=" + latitude + ":::Long=" + longitude);*/
-//
-//                    //Condition for network availability
-//                    if (AppCommon.isNetworkAvailability(ComplaintRegdActivity.this)) {
-//                        common.showDialog("Registering...."); //Showing registering dialog
-//                        Map<String, String> params = new HashMap<String, String>();
-//                        try {
-//
-//                            params.put("strReopenFlag", reopen);
-//                            params.put("strApplicantName", name);
-//                            params.put("strPhoneNo", mobNo);
-//                            params.put("strWardValue", wordID);
-//                            params.put("strCatagory", catagoryID);
-//                            params.put("strType", typeID);
-//                            params.put("strAreaValue", areaID);
-//                            params.put("strLandMark", landMarkText);
-//                            params.put("strCompDetails", complnDtlText);
-//                            params.put("strAddress", "");
-//                            // params.put("image", encodedImage);
-//                            if(imgStatus.contains("No"))
-//                                params.put("image", "");
-//                            else
-//                                params.put("image", imgStatus);
-//
-//                            params.put("strLat", latitude);
-//                            params.put("strLong", longitude);
-//                            params.put("strLastUpdateBy", citizenid);
-//                            params.put("strDeviceId", "");
-//                            params.put("strDevicePlatform", "");
-//                            params.put("strDeviceModel", "");
-//                            params.put("strAppVersion", "");
-//                            params.put("strGoogleArea", googleAreaName);
-//
-//                        } catch (Exception e) {
-//                        }
-//
-//                        String url = AppCommon.getURL() + "complainRegistrationV2";
-//                        PostJsonStringRequest jsonObjReq = new PostJsonStringRequest(
-//                                url, new JSONObject(params),
-//                                new Response.Listener<String>() {
-//                                    @Override
-//                                    public void onResponse(String response) {
-//                                        try {
-//                                            common.hideDialog();
-//                                            catagoryID = "0";
-//                                            typeID = "0";
-//                                            googleAreaName="";
-//                                            typeText.setVisibility(View.GONE);
-//                                            encodedImage = "";
-//                                            crossBtn.setVisibility(View.INVISIBLE);
-//                                            complnImage.setVisibility(View.INVISIBLE);
-//                                            landmark.setText("");
-//                                            complnDtl.setText("");
-//                                            String[] ticketID = response.split(",");
-//                                            // Log.i("STAG", response);
-//                                            //common.showAlert("Message", "Complain is registered successfully - " + ticketID[1]);
+    public View.OnClickListener registerComplaint(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isValid()) {
+                    //Condition for network availability
+                    if (AppCommon.isNetworkAvailability(IdeaRegistrationActivity.this)) {
+                        AppCommon.showDialog("Registering....",v.getContext()); //Showing registering dialog
+                        Map<String, String> params = new HashMap<String, String>();
+                        try {
+                          Log.i("atag",catagoryID+""+complnDtl.getText().toString()+":::::::"+imgStatus+"::::::::"+userId);
+                            params.put("strCatId", catagoryID);
+                            params.put("streIdeaDesc", complnDtl.getText().toString());
+                            if(imgStatus.contains("No"))
+                                params.put("strIdeaImg", "");
+                            else
+                                params.put("strIdeaImg", imgStatus);
+
+                            params.put("strUid", userId);
+
+                        } catch (Exception e) {
+                        }
+
+                        String url = AppCommon.getURL() + "insertIdeaData";
+                        PostJsonStringRequest jsonObjReq = new PostJsonStringRequest(
+                                url, new JSONObject(params),
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        AppCommon.hideDialog();
+                                        try {
+
+                                            Log.i("atag",response.toString());
 //                                            Intent intent = new Intent(ComplaintRegdActivity.this, ComplaintConfirmation.class);
 //                                            intent.putExtra("ticketId", ticketID[1]);
 //                                            startActivity(intent);
-//                                        }
-//                                        catch(Exception ex){
-//                                            common.showAlert("Message", "Please try after sometimes");
-//                                        }
-//                                    }
-//                                }, new Response.ErrorListener() {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                common.hideDialog();
-//                                common.showAlert("Message","Please try after sometimes");
-//                            }
-//                        });
-//                        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
-//                                90000,
-//                                -1,
-//                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//                        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-//                    } else { //else condition to store complaint info in draft
-//                        DatabaseHandler db = new DatabaseHandler(ComplaintRegdActivity.this);
-//                        Calendar c = Calendar.getInstance();
-//                        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy hh:mm aa");
-//                        String formattedDate = df.format(c.getTime());
-//                        Log.i("STAG", formattedDate);
-//                        ComplaintData comp_data = new ComplaintData();
-//                        comp_data.setReopen(reopen);
-//                        comp_data.setApplicant_name(name);
-//                        comp_data.setPhone_no(mobNo);
-//                        comp_data.setCopm_ward_id(wordID);
-//                        comp_data.setCatagory_id(catagoryID);
-//                        comp_data.setType_id(typeID);
-//                        comp_data.setComp_area_id(areaID);
-//                        comp_data.setLandmark(landMarkText);
-//                        comp_data.setComplaint_details(complnDtlText);
-//                        comp_data.setComp_image(encodedImage);
-//                        comp_data.setLat(latitude);
-//                        comp_data.setLongitude(longitude);
-//                        comp_data.setComp_citizen_id(citizenid);
-//                        comp_data.setCurrent_date(formattedDate);
-//                        db.addComplaintData(comp_data);
-//                        Intent intent = new Intent(ComplaintRegdActivity.this, ComplaintConfirmation.class);
-//                        intent.putExtra("ticketId", "0");
-//                        startActivity(intent);
-//                        //common.showAlert("Message", "Connection is not available.Your complaint is stored in draft.");
-//                    }
-//                }
-//            }
-//        };
-//    }
+                                        }
+                                        catch(Exception ex){
+                                            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "something went wrong.Please try after sometimes. ", Snackbar.LENGTH_LONG);
+                                            ColoredSnackbar.confirm(snackbar).show();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                AppCommon.hideDialog();
+                                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.SERVER_ERROR, Snackbar.LENGTH_LONG);
+                                ColoredSnackbar.confirm(snackbar).show();
+                            }
+                        });
+                        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                                90000,
+                                -1,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+                    } else { //else condition to store complaint info in draft
+                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.INTERNET_UNAVAILABLE, Snackbar.LENGTH_LONG);
+                        ColoredSnackbar.confirm(snackbar).show();
+                    }
+                }
+            }
+        };
+    }
     /*Fetch GPS Location ad set for Registration and Location*/
 //    private void fetchLocation(){
 //        gps = new GPSTracker(ComplaintRegdActivity.this);
@@ -1217,7 +722,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                 this.fileInputStream = fStream;
                 this.lengthbmp = lengthbmp;
             }catch(Exception ex){
-                Log.i("HttpFileUpload","URL Malformatted");
+                ex.printStackTrace();
             }
         }
         @Override

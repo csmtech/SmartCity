@@ -5,275 +5,68 @@
     android:orientation="vertical"
     android:background="#E6E6E6"
     android:weightSum="1">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:fillViewport="true">
-        <!--<ProgressBar-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/prog_connect"-->
-        <!--style="?android:attr/android:progressBarStyleSmall"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:layout_marginBottom="10dp" />-->
-
-    <!--<android.support.v4.widget.SwipeRefreshLayout-->
-        <!--android:id="@+id/catagoryswipeRefresh"-->
+    <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@+id/prog_connect">-->
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/recycle_view_catagory"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:scrollbars="vertical"/>-->
-    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+        <!--android:scrollbars="none"-->
+        <!--android:fillViewport="true">-->
+        <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/prog_connect"
+        style="?android:attr/android:progressBarStyleSmall"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/catagoryswipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/prog_connect">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_view_catagory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <LinearLayout
         android:orientation="vertical"
+        android:id="@+id/networkUnavailable"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <com.joanzapata.iconify.widget.IconTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/white"
-            android:id="@+id/soldWaste"
-            android:tag="6"
-            android:weightSum="2">
+            android:text="{ic-sad 70dp #8C8989}"
+            android:id="@+id/batchIcon"
+            android:textColor="#8C8989"
+            android:textStyle="bold"/>
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/catagory1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="{fa-trash 25sp } Solid Waste Mgmt."
-                android:layout_weight="1"
-                android:paddingTop="12dp"
-                android:paddingLeft="10dp"
-                android:paddingBottom="12dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:id="@+id/catagoryCount1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="100"
-                    android:textStyle="bold"
-                    android:textColor="#E36C09"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Ideas"
-                    android:id="@+id/textView14" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_marginTop="2dp"
-            android:tag="8"
-            android:id="@+id/streetLight"
-            android:weightSum="2">
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Can't Connect"
+            android:id="@+id/textView16"
+            android:textColor="#8C8989"
+            android:textStyle="bold"/>
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/catagory2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="{fa-lightbulb-o 25sp } Street Light"
-                android:layout_weight="1"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:paddingLeft="10dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginRight="10dp">
-
-                <TextView
-                    android:id="@+id/catagoryCount2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="1345"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:textColor="#E36C09"
-                    android:autoText="false" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Ideas"
-                    android:id="@+id/textView15" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="@color/white"
-            android:tag="10"
-            android:id="@+id/drinkWater"
-            android:weightSum="2">
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Please swipe top to refresh"
+            android:id="@+id/textView15"
+            android:textColor="#8C8989"/>
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/catagory3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="{ic-drinkingwater 25sp } Drinking Water"
-                android:layout_weight="1"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:paddingLeft="10dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginRight="10dp">
-
-                <TextView
-                    android:id="@+id/catagoryCount3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="111"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:textColor="#E36C09" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Ideas"
-                    android:id="@+id/textView16" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="@color/white"
-            android:tag="11"
-            android:id="@+id/swerage"
-            android:weightSum="2">
-
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/catagory4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="{ic-sewage 25sp } Sewage"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:gravity="right">
-
-                <TextView
-                    android:id="@+id/catagoryCount4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="111"
-                    android:textStyle="bold"
-                    android:textColor="#E36C09"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Ideas"
-                    android:id="@+id/textView17" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:background="@color/white"
-            android:tag="12"
-            android:id="@+id/miscGriev"
-            android:weightSum="2">
-
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/catagory5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="{fa-envelope-o 25sp } Misc. Grievance"
-                android:layout_weight="1"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:paddingLeft="10dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginRight="10dp">
-
-                <TextView
-                    android:id="@+id/catagoryCount5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="111"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#E36C09"
-                    android:gravity="right" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Ideas"
-                    android:id="@+id/textView18" />
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
-    </ScrollView>
+
+
+    <!--</ScrollView>-->
 </RelativeLayout>

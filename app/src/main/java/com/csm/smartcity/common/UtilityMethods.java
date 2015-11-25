@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -37,12 +38,17 @@ public class UtilityMethods {
         final String message=msg;
         AppCommon.showDialog("Loading....",c);
         String url = AppCommon.getURL()+"allControlsData/0/0";
+        Log.i("atag",url);
         final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, new JSONObject(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
                         try {
+
+                            Log.i("atag",response.toString());
+
                             int loopLength=(response.getJSONArray("allControlsDataResult").getJSONObject(0)).length();
                             ControllData strData=new ControllData();
                             DatabaseHandler db=new DatabaseHandler(context);
@@ -61,10 +67,10 @@ public class UtilityMethods {
                                 }else if(i==2){
                                     strData.setDataName("CATAGORYDATA");
                                     strData.setDataValue(response.getJSONArray("allControlsDataResult").getJSONObject(0).getJSONArray("CATAGORYDATA").toString());
-                                }else if(i==3){
-                                    strData.setDataName("TYPEDATA");
-                                    strData.setDataValue(response.getJSONArray("allControlsDataResult").getJSONObject(0).getJSONArray("TYPEDATA").toString());
-                                } else if (i == 4) {
+//                                }else if(i==3){
+//                                    strData.setDataName("TYPEDATA");
+//                                    strData.setDataValue(response.getJSONArray("allControlsDataResult").getJSONObject(0).getJSONArray("TYPEDATA").toString());
+                                } else if (i == 3) {
                                     strData.setDataName("STATUS");
                                     strData.setDataValue(response.getJSONArray("allControlsDataResult").getJSONObject(0).getJSONArray("STATUS").toString());
                                 }
@@ -95,9 +101,8 @@ public class UtilityMethods {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("TAG", "Error: " + error);
                 AppCommon.hideDialog();
-                Snackbar snackbar = Snackbar.make(((Activity)context).findViewById(android.R.id.content), CommonDialogs.FACEBOOK_ERROR, Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(((Activity)context).findViewById(android.R.id.content), CommonDialogs.SERVER_ERROR, Snackbar.LENGTH_LONG);
                 ColoredSnackbar.confirm(snackbar).show();
             }
         });
@@ -183,6 +188,19 @@ public class UtilityMethods {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+
+
+
+    public static Bitmap StringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte= Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
         }
     }
 

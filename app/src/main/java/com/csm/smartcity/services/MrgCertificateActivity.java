@@ -1,18 +1,83 @@
 package com.csm.smartcity.services;
 
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.csm.smartcity.R;
 
 public class MrgCertificateActivity extends AppCompatActivity {
-
+    private  WebView webview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mrg_certificate);
+        final ProgressDialog progressDialog=new ProgressDialog(MrgCertificateActivity.this);
+        progressDialog.setMessage("Loading...");
+        webview = (WebView) findViewById(R.id.webview1);
+        webview.getSettings().setJavaScriptEnabled(true);
+        //webview.setWebViewClient(new WebViewClient());
+
+        webview.setWebViewClient(new WebViewClient() {
+
+
+            //If you will not use this method url links are opeen in new brower not in webview
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                // TODO Auto-generated method stub
+                super.onPageStarted(view, url, favicon);
+                progressDialog.show();
+            }
+
+//            //Show loader on url load
+//            public void onLoadResource (WebView view, String url) {
+//                if (progressDialog == null) {
+//                    // in standard case YourActivity.this
+//
+//                    progressDialog.show();
+//                }
+//            }
+            public void onPageFinished(WebView view, String url) {
+                try{
+//                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+
+//                        progressDialog.dismiss();
+
+//                    }
+//                    String javascript="javascript: document.getElementById('headerLogo').style.display='none';";
+//                    view.loadUrl(javascript);
+                    webview.loadUrl("javascript:(function() { " +
+                            "document.getElementsByClassName('Header')[0].style.display='none'; })()");
+
+                }catch(Exception exception){
+                    exception.printStackTrace();
+                    progressDialog.dismiss();
+                }
+            }
+
+
+        });
+
+        webview.loadUrl("http://bmc.gov.in/OnlineRegistration_yatriNivas_mobile.aspx");
+
+    }
+    @Override
+    public void onBackPressed() {
+        if(webview.canGoBack()) {
+            webview.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

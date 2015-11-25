@@ -34,6 +34,8 @@ import com.csm.smartcity.R;
 import com.csm.smartcity.cityChampians.CityChampiansActivity;
 import com.csm.smartcity.common.AppCommon;
 import com.csm.smartcity.common.CircularNetworkImageView;
+import com.csm.smartcity.common.ColoredSnackbar;
+import com.csm.smartcity.common.CommonDialogs;
 import com.csm.smartcity.common.UtilityMethods;
 import com.csm.smartcity.connection.CustomVolleyRequestQueue;
 import com.csm.smartcity.idea.IdeaActivity;
@@ -50,6 +52,7 @@ import java.io.InputStream;
 
 public class NewDashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TextView layoutIdea;
+    LinearLayout layoutService;
     LinearLayout infoLayout;
     LinearLayout grievanceModule;
     LoginUserObject objLogin; // LoginUserObject is a pojo object of  citizen details contains getter setter
@@ -83,7 +86,7 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
         infoLayout=(LinearLayout)findViewById(R.id.infoLayout);
         layoutIdea=(TextView)findViewById(R.id.layoutIdea);
         grievanceModule=(LinearLayout)findViewById(R.id.grievanceModule);
-
+        layoutService=(LinearLayout)findViewById(R.id.services);
         layoutIdea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +101,12 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
                 startActivity(new Intent(NewDashboardActivity.this, InformationActivity.class));
             }
         });
-
+        layoutService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewDashboardActivity.this, Services.class));
+            }
+        });
 
         grievanceModule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,7 +234,12 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
             Intent i = new Intent(NewDashboardActivity.this, CityChampiansActivity.class);
             startActivity(i);
         }else if (id == R.id.appData) {
-            UtilityMethods.getAllData("upd", NewDashboardActivity.this);
+            if(AppCommon.isNetworkAvailability(getApplicationContext())==true) {
+                UtilityMethods.getAllData("upd", NewDashboardActivity.this);
+            }else{
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.INTERNET_UNAVAILABLE, Snackbar.LENGTH_LONG);
+                ColoredSnackbar.confirm(snackbar).show();
+            }
             // Handle the camera action
         } else if (id == R.id.logout) {
            Log.i("atag", item.getTitle().toString());
@@ -351,9 +364,8 @@ public class NewDashboardActivity extends AppCompatActivity implements Navigatio
             bmImage.setImageBitmap(result);
         }
     }
-    public void onService(View v)
 
-    {
-        startActivity(new Intent(this, Services.class));
-    }
+
+
+
 }

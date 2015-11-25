@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.text.Html;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -48,6 +51,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,6 +77,24 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         try{
+
+            // Add code to print out the key hash
+            try {
+                PackageInfo info = getPackageManager().getPackageInfo(
+                        "com.csm.smartcity",
+                        PackageManager.GET_SIGNATURES);
+               // for (Signature signature : info.signatures) {
+                    MessageDigest md = MessageDigest.getInstance("SHA");
+                   // md.update(signature.toByteArray());
+                    Log.i("atag", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+               //}
+            } catch (PackageManager.NameNotFoundException e) {
+
+            } catch (NoSuchAlgorithmException e) {
+
+            }
+
+
             skip=(TextView)findViewById(R.id.skip);
             skip.setText(Html.fromHtml("<u><b><i>Skip</i></b></u>"));
             btnFacebook=(LinearLayout)findViewById(R.id.btnFacebook);

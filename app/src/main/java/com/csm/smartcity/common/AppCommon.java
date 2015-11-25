@@ -17,11 +17,11 @@ import com.csm.smartcity.sqlLiteModel.LoginUserObject;
 public class AppCommon {
     static ProgressDialog  pDialog;
 
-  //   private static String baseURL="http://203.129.207.124/bmcsampark/"; ////Staging External IP
+    private static String baseURL="http://203.129.207.124/bmcsampark/"; ////Staging External IP
    // private static String baseURL="http://192.168.10.42/bmcsampark/"; ////Staging Internal IP server 27
     // private static String baseURL="http://mycitymypride.org/"; ////LIVE
    //  private static String baseURL="http://192.168.8.112/BMCSAMPARKNEW/"; ////Local
-   private static String baseURL="http://192.168.8.106/bmcsampark/";//Zafir sir
+   //private static String baseURL="http://192.168.8.106/bmcsampark/";//Zafir sir
 
 
     public static String getURL(){
@@ -37,7 +37,7 @@ public class AppCommon {
 //    }
 
     public static String getComplaintImgHandlrUrl(){
-        return baseURL+"web/Uploader.ashx";  //http://192.168.8.113/bmcsampark/web/Uploader.ashx
+        return baseURL+"web/IdeaUploader.ashx";  //http://192.168.8.113/bmcsampark/web/Uploader.ashx
     }
 
     public static boolean isNetworkAvailability(Context context ){
