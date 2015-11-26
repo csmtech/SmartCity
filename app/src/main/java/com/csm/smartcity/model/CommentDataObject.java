@@ -4,21 +4,29 @@ package com.csm.smartcity.model;
  * Created by arundhati on 11/23/2015.
  */
 public class CommentDataObject {
-    private String COMMENT;
+    private String COMMENTS;
     private String COMMENT_DATE;
     private String USERID;
     private String USER_AREA_NAME;
     private String USER_NAME;
     private String USER_PIC;
     private String USER_PIC_FLAG;
-    private String strIdea_ID;
+    private String ID;
 
-    public String getCOMMENT() {
-        return COMMENT;
+    public String getCOMMENTS() {
+        return COMMENTS;
     }
 
-    public void setCOMMENT(String COMMENT) {
-        this.COMMENT = COMMENT;
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setCOMMENTS(String COMMENTS) {
+        this.COMMENTS = COMMENTS;
     }
 
     public String getCOMMENT_DATE() {
@@ -69,11 +77,5 @@ public class CommentDataObject {
         this.USER_PIC_FLAG = USER_PIC_FLAG;
     }
 
-    public String getStrIdea_ID() {
-        return strIdea_ID;
-    }
 
-    public void setStrIdea_ID(String strIdea_ID) {
-        this.strIdea_ID = strIdea_ID;
-    }
 }

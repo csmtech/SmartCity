@@ -183,7 +183,7 @@
                 android:text="Others\n\n{fa-envelope 30sp #606060}"
                 android:onClick="openPopup"
                 android:textSize="10sp"
-                android:tag="5"
+                android:tag="12"
                 android:layout_marginRight="1sp"
                 android:background="#ffffff"
                 android:textColor="#949494"
@@ -354,7 +354,7 @@
 
 
         <com.joanzapata.iconify.widget.IconButton
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="45dp"
             android:text="{fa-check} Post"
             android:id="@+id/complnpost"

@@ -21,7 +21,7 @@ public class AppCommon {
    // private static String baseURL="http://192.168.10.42/bmcsampark/"; ////Staging Internal IP server 27
     // private static String baseURL="http://mycitymypride.org/"; ////LIVE
    //  private static String baseURL="http://192.168.8.112/BMCSAMPARKNEW/"; ////Local
-   //private static String baseURL="http://192.168.8.106/bmcsampark/";//Zafir sir
+  // private static String baseURL="http://192.168.8.106/bmcsampark/";//Zafir sir
 
 
     public static String getURL(){
@@ -32,9 +32,9 @@ public class AppCommon {
         return baseURL+"photos/citizen/citizen_";
     }
 
-//    public static String getIdeaPhotoUrl(){
-//
-//    }
+    public static String getIdeaPhotoUrl(){
+        return baseURL+"Photos/IDEA/";
+    }
 
     public static String getComplaintImgHandlrUrl(){
         return baseURL+"web/IdeaUploader.ashx";  //http://192.168.8.113/bmcsampark/web/Uploader.ashx

@@ -3,6 +3,7 @@ package com.csm.smartcity.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +49,12 @@ public class CommentListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof UserListViewHolder) {
             ((UserListViewHolder)holder).txtName.setText(UtilityMethods.getSentencecaseString(mDataset.get(position).getUSER_NAME()));
-            ((UserListViewHolder)holder).txtDesc.setText(mDataset.get(position).getCOMMENT());
+            ((UserListViewHolder)holder).txtDesc.setText(mDataset.get(position).getCOMMENTS());
+            ((UserListViewHolder)holder).txtday.setText(mDataset.get(position).getCOMMENT_DATE());
             String userUrl= AppCommon.getUserPhotoURL()+mDataset.get(position).getUSER_PIC();
             new UtilityMethods.LoadProfileImage(((UserListViewHolder)holder).imgUserImage).execute(userUrl);
-
         }
+
     }
 
     @Override
@@ -66,13 +68,13 @@ public class CommentListAdapter extends RecyclerView.Adapter {
         ImageView imgUserImage;
         TextView txtName;
         TextView txtDesc;
-
+        TextView txtday;
         public UserListViewHolder(View itemView) {
             super(itemView);
             imgUserImage=(ImageView)itemView.findViewById(R.id.imgUserImage);
             txtName=(TextView)itemView.findViewById(R.id.txtName);
             txtDesc=(TextView)itemView.findViewById(R.id.txtDesc);
-
+            txtday=(TextView)itemView.findViewById(R.id.txtday);
 
         }
     }

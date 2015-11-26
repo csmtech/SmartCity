@@ -41,6 +41,15 @@
                 android:textColor="#525252"
                 android:text="in my city my pride complaint are not resolved in reality but thy are declared arecolved"
                 android:textSize="15sp" />
+        <TextView
+            android:id="@+id/txtday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="19 Oct 2016 12:00 AM"
+            android:layout_below="@+id/txtDesc"
+            android:textColor="#999999"
+            />
 
     </LinearLayout>
 

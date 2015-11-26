@@ -78,7 +78,6 @@ import java.util.Locale;
 import java.util.Map;
 
 public class IdeaRegistrationActivity extends AppCompatActivity {
-
      /*
       * Declaration of all view components
       * */
@@ -100,7 +99,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
     LinearLayout tableView; //Table view used to hide table layout and show complaint image when image is selected/taken.
     //Declaration of complaint post button
     IconButton complnpost;
-
     LoginUserObject objLogin; // LoginUserObject is a pojo object of  citizen details contains getter setter
     /*
     * Declaration of string variables
@@ -115,7 +113,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
     * */
     private static int RESULT_LOAD_IMG = 2; //variable for start activity on result request code to load image from gallery
     private static int REQUEST_CAMERA=1; //variable for start activity on result request code to open camera
-
     DonutProgress pb;
     IconButton upload;
     IconButton retry;
@@ -123,7 +120,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
     long lengthbmp;
     String imgStatus="No";
     RelativeLayout layoutImageUpload;
-
     private String uploadStatus="false";
     private boolean uploadCancelStatus=false;
     Bitmap bm;
@@ -177,7 +173,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -189,7 +184,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 String cnt = String.valueOf(500 - s.length());
@@ -198,8 +192,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         });
         //Adding on click listener to complaint post button
         complnpost.setOnClickListener(registerComplaint());
-
-
     }
 
     @Override
@@ -227,16 +219,13 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         encodedImage="";
         imgDecodableString="";
         tableView.setVisibility(View.VISIBLE);
-        // roundOr.setVisibility(View.VISIBLE);
         layoutImageUpload.setVisibility(View.GONE);
         crossBtn.setVisibility(View.GONE);
         complnImage.setAlpha((float) 0.0);
         upload.setVisibility(View.GONE);
         retry.setVisibility(View.GONE);
         pb.setVisibility(View.GONE);
-
-        FileInputStream fstrm=null;
-        Log.e("EEEE", "EEEE " + uploadStatus);
+        FileInputStream fstrm=null;;
         uploadStatus="true";
         if(bm!=null)
         {
@@ -248,7 +237,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
             picture.recycle();
             picture=null;
         }
-        Log.i("STAG",imgStatus+" nnnnnnnnnnnnnnnnnnnnnn");
         if(imgStatus.contains("No")){
 
         }
@@ -267,7 +255,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             AppCommon.hideDialog();
                             try {
-                                Log.i("STAG",response.toString());
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -377,7 +364,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
             if (requestCode==1 && resultCode == RESULT_OK && data!=null) {
                 complnImage.setAlpha((float) 0.0);
                 uploadStatus="false";
-                //ImageView imgView = (ImageView) findViewById(R.id.complnImage);
                 layoutImageUpload.setVisibility(View.VISIBLE);
                 picture = (Bitmap) data.getExtras().get("data");
                 bm1= UtilityMethods.getResizedBitmap(picture, 500);
@@ -386,17 +372,14 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                 b = stream.toByteArray();
                 lengthbmp = b.length;
                 encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-                //Log.i("STAG", encodedImage);
                 complnImage.setImageBitmap(picture);
                 uploadPhoto();
             }
             //gallery image activity result
             else if(requestCode==2 && resultCode == RESULT_OK && data!=null) {
-//               try {
                 complnImage.setAlpha((float) 0.0);
                 uploadStatus = "false";
                 layoutImageUpload.setVisibility(View.VISIBLE);
-                //ImageView imgView = (ImageView) findViewById(R.id.complnImage);
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 // Get the cursor
@@ -407,42 +390,19 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
 
-                // bm = BitmapFactory.decodeFile(imgDecodableString);
-
                 final BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 8;
 
                 bm = BitmapFactory.decodeFile(imgDecodableString,options);
-
-
                 bm1 = UtilityMethods.getResizedBitmap(bm, 500);
 
-                   /* if(bm!=null)
-                    {
-                        bm.recycle();
-                        bm=null;
-                    }*/
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bm1.compress(Bitmap.CompressFormat.JPEG, 60, baos); //bm is the bitmap object
                 b = baos.toByteArray();
                 lengthbmp = b.length;
                 encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-                // Log.i("STAG", encodedImage);
-
                 complnImage.setImageBitmap(bm);
                 uploadPhoto();
-                /*}catch (OutOfMemoryError err){
-                    err.printStackTrace();*/
-               /* }
-                catch (Exception e){
-                    e.printStackTrace();
-                }*/
-
-//                tableView.setVisibility(View.INVISIBLE);
-//                roundOr.setVisibility(View.INVISIBLE);
-//                crossBtn.setVisibility(View.VISIBLE);
-//                complnImage.setVisibility(View.VISIBLE);
-
             }else{
                 if(requestCode==3)
                     Toast.makeText(this, "You haven't picked any complaint type. ", Toast.LENGTH_LONG).show();
@@ -482,7 +442,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
 
         thread.start();
         tableView.setVisibility(View.GONE);
-        // roundOr.setVisibility(View.INVISIBLE);
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -540,7 +499,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                         AppCommon.showDialog("Registering....",v.getContext()); //Showing registering dialog
                         Map<String, String> params = new HashMap<String, String>();
                         try {
-                          Log.i("atag",catagoryID+""+complnDtl.getText().toString()+":::::::"+imgStatus+"::::::::"+userId);
+                         // Log.i("atag",catagoryID+""+complnDtl.getText().toString()+":::::::"+imgStatus+"::::::::"+userId);
                             params.put("strCatId", catagoryID);
                             params.put("streIdeaDesc", complnDtl.getText().toString());
                             if(imgStatus.contains("No"))
@@ -560,12 +519,38 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(String response) {
                                         AppCommon.hideDialog();
+                                        Log.i("atag",response);
                                         try {
+                                            String res=new JSONObject(response).getString("insertIdeaDataResult");
 
-                                            Log.i("atag",response.toString());
-//                                            Intent intent = new Intent(ComplaintRegdActivity.this, ComplaintConfirmation.class);
-//                                            intent.putExtra("ticketId", ticketID[1]);
-//                                            startActivity(intent);
+                                            if(res.equals("Success")){
+
+                                                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Your idea is registered successfully.", Snackbar.LENGTH_LONG);
+                                                ColoredSnackbar.confirm(snackbar).show();
+
+
+                                                catagoryID="0";
+                                                complnDtl.setText("");
+                                                imgStatus="No";
+                                                tableView.setVisibility(View.VISIBLE);
+                                                layoutImageUpload.setVisibility(View.GONE);
+
+                                                txtTransport.setText("Smart Transport\nSolutions\n\n{fa-bus 30sp #606060}");
+                                                txtWaste.setText("Smart Waste\nManagement.\n\n{fa-trash 30sp #606060}");
+                                                txtCitizens.setText("Citizen Engagement\nInitiatives\n\n{fa-users 27sp #606060}");
+                                                txtTown.setText("Bhubaneswar Smart District:\nTown Center\n\n{fa-cubes 27sp #606060}");
+                                                txtOthers.setText("Others\n\n{fa-envelope 30sp #606060}");
+
+                                                txtTransport.setTextColor(Color.parseColor("#606060"));
+                                                txtWaste.setTextColor(Color.parseColor("#606060"));
+                                                txtCitizens.setTextColor(Color.parseColor("#606060"));
+                                                txtTown.setTextColor(Color.parseColor("#606060"));
+                                                txtOthers.setTextColor(Color.parseColor("#606060"));
+
+                                            }else{
+                                                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "something went wrong.Please try after sometimes. ", Snackbar.LENGTH_LONG);
+                                                ColoredSnackbar.confirm(snackbar).show();
+                                            }
                                         }
                                         catch(Exception ex){
                                             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "something went wrong.Please try after sometimes. ", Snackbar.LENGTH_LONG);
@@ -593,118 +578,7 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
             }
         };
     }
-    /*Fetch GPS Location ad set for Registration and Location*/
-//    private void fetchLocation(){
-//        gps = new GPSTracker(ComplaintRegdActivity.this);
-//        if(!gps.canGetLocation()){
-//            gps.showSettingsAlert();
-//        }
-//        else{
-//            latitude = String.valueOf(gps.getLatitude());
-//            longitude = String.valueOf(gps.getLongitude());
-//
-//            //21.004578, 81.443769
-//            //latitude = "21.004578";
-//            //longitude = "81.443769";
-//
-//            String url=AppCommon.getURL()+"getMyLocation";
-//            autoLocationProgress.setVisibility(View.VISIBLE);
-//            if(AppCommon.isNetworkAvailability(getApplicationContext())==true) {
-//
-//                Map<String, String> params = new HashMap<String, String>();
-//                try {
-//                    params.put("strlat", latitude);
-//                    params.put("strlong", longitude);
-//                } catch (Exception e) {
-//                }
-//
-//                PostJsonArrayRequest jsonObjReq = new PostJsonArrayRequest(url, new JSONObject(params),
-//                        new Response.Listener<JSONArray>() {
-//                            @Override
-//                            public void onResponse(JSONArray response) {
-//                                try {
-//                                    final String wardName=response.getJSONObject(0).getString("NAME");
-//                                    wordID=response.getJSONObject(0).getString("ID");
-//                                    if(wordID.equals("99")){
-//                                        Log.i("RTAG", "local address!");
-//                                        //new NotificationTipView(getApplicationContext(),viewGroup, 10000, NotificationTipView.OUT_SIDE);
-//                                        setLocation();
-//                                        autoLocationProgress.setVisibility(View.GONE);
-//                                    }
-//                                    else{
-//                                        final Geocoder geocoder;
-//                                        geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
-//                                        if(geocoder.isPresent()) {
-//
-//                                            new AsyncTask<Void, Void, String>()
-//                                            {
-//                                                @Override
-//                                                protected String doInBackground(Void... str)
-//                                                {
-//                                                    List<Address> addresses;
-//                                                    String firstAddress="";
-//                                                    try {
-//                                                        addresses = geocoder.getFromLocation(gps.getLatitude(), gps.getLongitude(), 1);
-//                                                        //addresses = geocoder.getFromLocation(21.004578, 81.443769, 1);
-//
-//                                                        //String address = addresses.get(0).getAddressLine(0);
-//                                                        if (addresses != null) {
-//                                                            Address returnedAddress = addresses.get(0);
-//                                                            firstAddress = returnedAddress.getAddressLine(0);
-//                                                            return firstAddress;
-//                                                        } else {
-//                                                            Log.i("RTAG", "No Address returned!");
-//                                                        }
-//
-//                                                    } catch (IOException e) {
-//                                                        // e.printStackTrace();
-//                                                        Log.i("RTAG", "Canont get Address!");
-//                                                    }
-//                                                    return "";
-//                                                }
-//
-//                                                @Override
-//                                                protected void onPostExecute(String address)
-//                                                {
-//                                                    // do whatever you want/need to do with the address found
-//                                                    // remember to check first that it's not null
-//                                                    //Log.i("RTAG",address);
-//                                                    autoLocationProgress.setVisibility(View.GONE);
-//                                                    if(address!="") {
-//                                                        googleAreaName=address;
-//                                                        areaID="0";
-//                                                        location.setText(address+", "+wardName);
-//                                                        btn_edit_loc.setVisibility(View.VISIBLE);
-//                                                        btn_select_area.setVisibility(View.GONE);
-//                                                    }
-//                                                }
-//                                            }.execute();
-//
-//                                        }
-//                                    }
-//                                } catch (Exception e) {
-//                                    autoLocationProgress.setVisibility(View.GONE);
-//                                }
-//
-//                            }
-//                        }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Log.i("RTAG", "Error: " + error);
-//                        autoLocationProgress.setVisibility(View.GONE);
-//                    }
-//                });
-//                jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(30000,-1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//                AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-//            }
-//            else{
-//                autoLocationProgress.setVisibility(View.GONE);
-//                new NotificationTipView(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), 10000, NotificationTipView.INTERNET_UNAVAILABLE_DRAFT);
-//            }
-//        }
-//
-//
-//    }
+
     class photoUploadTask extends AsyncTask<Void, Integer, String> implements DialogInterface.OnCancelListener {
 
         URL connectURL;
@@ -727,12 +601,6 @@ public class IdeaRegistrationActivity extends AppCompatActivity {
         }
         @Override
         protected void onPreExecute() {
-
-
-            // pb.setVisibility(View.VISIBLE);
-
-            // updating progress bar value
-
         }
 
         @Override

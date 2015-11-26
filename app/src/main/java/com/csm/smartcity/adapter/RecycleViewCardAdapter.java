@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Cache;
@@ -34,6 +36,7 @@ import com.csm.smartcity.common.AppController;
 import com.csm.smartcity.common.ColoredSnackbar;
 import com.csm.smartcity.common.CommonDialogs;
 import com.csm.smartcity.common.CustomNetworkImageView;
+import com.csm.smartcity.common.OnLoadMoreListener;
 import com.csm.smartcity.common.ShareHelper;
 import com.csm.smartcity.common.UtilityMethods;
 import com.csm.smartcity.connection.CustomVolleyRequestQueue;
@@ -57,28 +60,59 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
     private ArrayList<IdeaDataObject> mDataset;
     private ImageLoader mImageLoader;
     Context c;
+    private OnLoadMoreListener onLoadMoreListener;
+    private int lastVisibleItem, totalItemCount;
+    private boolean loading = false;
+    private int visibleThreshold = 5; //number of items remain to the recycler before reaching the end
+    private final int VIEW_ITEM = 1;
+    private final int VIEW_PROG = 0;
 
     public RecycleViewCardAdapter(ArrayList<IdeaDataObject> myDataset, RecyclerView recyclerView) {
         mDataset=myDataset;
+
+        if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
+
+            final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    totalItemCount = linearLayoutManager.getItemCount();
+                    lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
+                    if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                        // End has been reached
+                        // Do something
+                        if (onLoadMoreListener != null) {
+                            onLoadMoreListener.onLoadMore();
+                        }
+                        loading = true;
+                    }
+                }
+            });
+        }
 
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder vh;
         c=parent.getContext();
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_complaint, parent, false);
-        vh = new RecentViewHolder(v);
-       // mImageLoader = CustomVolleyRequestQueue.getInstance(parent.getContext()).getImageLoader();
-         mImageLoader = AppController.getInstance().getImageLoader();
-
+        RecyclerView.ViewHolder vh;
+        if (viewType == VIEW_ITEM) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_complaint, parent, false);
+            vh = new RecentViewHolder(v);
+        } else {
+            View v = LayoutInflater.from(parent.getContext()).inflate( R.layout.progressbar_item, parent, false);
+            vh = new ProgressViewHolder(v);
+        }
+        mImageLoader = AppController.getInstance().getImageLoader();
         return vh;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof RecentViewHolder) {
 
+        if (holder instanceof RecentViewHolder) {
             ((RecentViewHolder)holder).txtCompUser.setText(UtilityMethods.getSentencecaseString(mDataset.get(position).getCITIZEN_NAME()));
             ((RecentViewHolder)holder).txtTime.setText(mDataset.get(position).getDURATION());
             ((RecentViewHolder)holder).txtCompArea.setText(mDataset.get(position).getCITIZEN_AREA_NAME());
@@ -87,18 +121,15 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
             ((RecentViewHolder)holder).txt_comment_count.setText(mDataset.get(position).getCOMMENT_COUNT() + " Comment");
 
             String userUrl=AppCommon.getUserPhotoURL()+mDataset.get(position).getCITIZEN_IMAGE();
-         //   String ideaImgUrl=AppCommon.getUserPhotoURL()+mDataset.get(position).getCITIZEN_IMAGE();
-
-
-           // new UtilityMethods.LoadProfileImage(((RecentViewHolder)holder).imgUserimage).execute(userUrl);
+            String ideaImgUrl=AppCommon.getIdeaPhotoUrl()+mDataset.get(position).getIDEA_IMAGE();
 
             if(AppCommon.isNetworkAvailability(c)==true) {
 
                 mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgUserimage, R.drawable.complaint, R.drawable.complaint_image_null));
                 ((RecentViewHolder)holder).imgUserimage.setImageUrl(userUrl, mImageLoader);
 
-                 mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
-                ((RecentViewHolder)holder).imgCompImage.setImageUrl(userUrl, mImageLoader);
+                 mImageLoader.get(ideaImgUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
+                ((RecentViewHolder)holder).imgCompImage.setImageUrl(ideaImgUrl, mImageLoader);
             }else {
                 Cache cache = AppController.getInstance().getRequestQueue().getCache();
                 Cache.Entry entry = cache.get(userUrl);
@@ -106,26 +137,35 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
                     try {
                         String data = new String(entry.data, "UTF-8");
                         Log.i("atag","arundhati  "+data);
-                        ((RecentViewHolder) holder).imgCompImage.setImageBitmap(UtilityMethods.StringToBitMap(data));
 
                         ((RecentViewHolder) holder).imgUserimage.setImageBitmap(UtilityMethods.StringToBitMap(data));
                         //((RecentViewHolder) holder).imgCompImage.
                     } catch (UnsupportedEncodingException e) {
-
                         mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgUserimage, R.drawable.complaint, R.drawable.complaint_image_null));
                         ((RecentViewHolder)holder).imgUserimage.setImageUrl(userUrl, mImageLoader);
-
-                        mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
-                        ((RecentViewHolder)holder).imgCompImage.setImageUrl(userUrl, mImageLoader);
                         e.printStackTrace();
                     }
                 } else {
-
                     mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgUserimage, R.drawable.complaint, R.drawable.complaint_image_null));
                     ((RecentViewHolder)holder).imgUserimage.setImageUrl(userUrl, mImageLoader);
+                }
 
-                    mImageLoader.get(userUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
-                    ((RecentViewHolder)holder).imgCompImage.setImageUrl(userUrl, mImageLoader);
+                Cache ideacache = AppController.getInstance().getRequestQueue().getCache();
+                Cache.Entry ideaentry = ideacache.get(ideaImgUrl);
+                if (entry != null) {
+                    try {
+                        String ideadata = new String(ideaentry.data, "UTF-8");
+                        Log.i("atag", "arundhati  " + ideadata);
+                        ((RecentViewHolder) holder).imgCompImage.setImageBitmap(UtilityMethods.StringToBitMap(ideadata));
+
+                    } catch (UnsupportedEncodingException e) {
+                        mImageLoader.get(ideaImgUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
+                        ((RecentViewHolder)holder).imgCompImage.setImageUrl(ideaImgUrl, mImageLoader);
+                        e.printStackTrace();
+                    }
+                } else {
+                    mImageLoader.get(ideaImgUrl, ImageLoader.getImageListener(((RecentViewHolder) holder).imgCompImage, R.drawable.complaint, R.drawable.complaint_image_null));
+                    ((RecentViewHolder)holder).imgCompImage.setImageUrl(ideaImgUrl, mImageLoader);
                 }
 
             }
@@ -142,7 +182,10 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
             ((RecentViewHolder) holder).txt_comment_count.setOnClickListener(commentListOnclickListener(mDataset.get(position).getIDEA_ID()));
 
 
+        }else {
+            ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);
         }
+
     }
 
     @Override
@@ -150,7 +193,19 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
         return mDataset.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        int retInt = mDataset.get(position) != null ? VIEW_ITEM : VIEW_PROG;
+        //   Log.i("RTAG", mDataset.get(position) + "-"+position);
+        return retInt;
+    }
 
+    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
+        this.onLoadMoreListener = onLoadMoreListener;
+    }
+    public void setLoaded() {
+        loading = false;
+    }
     public static class RecentViewHolder extends RecyclerView.ViewHolder
     {
         IconTextView txtCompDetail;
@@ -159,12 +214,12 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
         TextView txtCompArea;
         TextView txtLikeCount;
         TextView txt_comment_count;
-        TextView txtSupport;
+       // TextView txtSupport;
         TextView txtSupportIcon;
         TextView txtShareIcon;
         TextView txtInviteIcon;
-        CustomNetworkImageView imgUserimage;
-        CustomNetworkImageView imgCompImage;
+        NetworkImageView imgUserimage;
+        NetworkImageView imgCompImage;
         LinearLayout layoutShare;
         LinearLayout layoutLike;
         LinearLayout layoutComment;
@@ -187,7 +242,7 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
             txt_comment_count= (TextView) itemView.findViewById(R.id.txt_comment_count);
             layoutShare = (LinearLayout) itemView.findViewById(R.id.layoutShare);
             layoutLike = (LinearLayout) itemView.findViewById(R.id.layoutLike);
-            txtSupport = (TextView) itemView.findViewById(R.id.txtSupport);
+
             layoutComment = (LinearLayout) itemView.findViewById(R.id.layoutComment);
             layoutSupportShare = (LinearLayout) itemView.findViewById(R.id.layout_support_share_bar);
             layoutClap = (LinearLayout) itemView.findViewById(R.id.layout_clap);
@@ -197,10 +252,19 @@ public class RecycleViewCardAdapter extends RecyclerView.Adapter {
             txtUpdatedBy = (TextView) itemView.findViewById(R.id.txt_updated_by);
             txtUpdatedOn = (TextView) itemView.findViewById(R.id.txt_updated_on);
             txtResolvedRemark = (TextView) itemView.findViewById(R.id.txt_resolve_remark);
-            imgUserimage=(CustomNetworkImageView)itemView.findViewById(R.id.imgUserimage);
-            imgCompImage=(CustomNetworkImageView)itemView.findViewById(R.id.imgCompImage);
+            imgUserimage=(NetworkImageView)itemView.findViewById(R.id.imgUserimage);
+            imgCompImage=(NetworkImageView)itemView.findViewById(R.id.imgCompImage);
         }
 
+    }
+
+    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
+
+        public ProgressViewHolder(View v) {
+            super(v);
+            progressBar = (ProgressBar) v.findViewById(R.id.progressBar1);
+        }
     }
 
     private View.OnClickListener likeOnclickListener(final String id){

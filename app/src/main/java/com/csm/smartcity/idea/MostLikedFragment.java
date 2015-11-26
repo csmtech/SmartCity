@@ -4,6 +4,7 @@ package com.csm.smartcity.idea;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import com.csm.smartcity.common.AppCommon;
 import com.csm.smartcity.common.AppController;
 import com.csm.smartcity.common.ColoredSnackbar;
 import com.csm.smartcity.common.CommonDialogs;
+import com.csm.smartcity.common.OnLoadMoreListener;
 import com.csm.smartcity.model.IdeaDataObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -52,6 +54,7 @@ public class MostLikedFragment extends Fragment {
     private String catagory_id="0";
     JSONArray ideaData=null;
     LinearLayout networkUnavailable;
+    protected Handler loadMorehandler;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        // return super.onCreateView(inflater, container, savedInstanceState);
@@ -98,6 +101,42 @@ public class MostLikedFragment extends Fragment {
 
             }
         });
+
+
+
+              /* Load More Items on Infinite Scroll*/
+        loadMorehandler=new Handler();
+        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                //add null , so the adapter will check view_type and show progress bar at bottom
+                mostLikedArrayList.add(null);
+                mAdapter.notifyItemInserted(mostLikedArrayList.size() - 1);
+
+                loadMorehandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //   remove progress item
+                        // compArrayList.remove(compArrayList.size() - 1);
+                        mostLikedArrayList.remove(null);
+                        mAdapter.notifyItemRemoved(mostLikedArrayList.size());
+                        //add items one by one
+                        int start = mostLikedArrayList.size();
+                        // int end = start + 10;
+                        // callServiceMethd("allComplaint/T/0/" + start + "/0/0","LOAD_MORE");
+                        callServiceMethd("getIdeas/M/" + strCitizenID + "/" + catagory_id + "/" + start, "LOAD_MORE");
+
+                        mAdapter.setLoaded();
+                        //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+                    }
+                }, 2000);
+
+            }
+        });
+
+
+
+
     }
 
     private void callServiceMethd(String url,String loadType){
@@ -225,7 +264,7 @@ public class MostLikedFragment extends Fragment {
                     mostLikedArrayList.add(tempArrayList.get(i));
                 }
                 mAdapter.notifyItemInserted(mostLikedArrayList.size());
-                // mAdapter.setLoaded();
+                mAdapter.setLoaded();
                 break;
         }
 

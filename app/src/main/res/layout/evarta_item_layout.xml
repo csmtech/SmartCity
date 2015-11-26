@@ -18,53 +18,208 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
-            >
+            android:background="#ffffff">
 
 
-            <RelativeLayout
+            <!--<RelativeLayout-->
 
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_margin="10dp">-->
+
+               <!--&lt;!&ndash; <com.csm.utils.CircularNetworkImageView-->
+                    <!--android:layout_width="78dp"-->
+                    <!--android:layout_height="78dp"-->
+                    <!--android:id="@+id/imgUserimage"-->
+                    <!--/>&ndash;&gt;-->
+                <!--<ImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:id="@+id/imgUserimage"-->
+                     <!--android:src="@drawable/pdf26" />-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                    <!--android:text="Test dsfsfdf adsfsf"-->
+                    <!--android:id="@+id/txtCompUser"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_toRightOf="@+id/imgUserimage"-->
+                    <!--android:layout_toEndOf="@+id/imgUserimage"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--style="@style/HomeText"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txtday"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:text="19 Oct 2016 12:00 AM"-->
+                    <!--android:layout_below="@+id/txtCompUser"-->
+                    <!--android:textColor="#999999"-->
+                    <!--android:layout_toRightOf="@+id/imgUserimage"-->
+                    <!--android:layout_toEndOf="@+id/imgUserimage"-->
+                    <!--android:layout_marginLeft="10dp" />-->
+               <!--&lt;!&ndash; <ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:id="@+id/downloadmg"-->
+                    <!--android:layout_toRightOf="@+id/txtCompUser"-->
+                    <!--android:onClick="onDownload"-->
+                    <!--android:layout_marginLeft="40dip"-->
+
+                    <!--android:src="@drawable/download" />&ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:background="@color/white"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:layout_toRightOf="@+id/imgUserimage"-->
+                    <!--android:id="@+id/soldWaste"-->
+                    <!--android:layout_marginLeft="50dp"-->
+                    <!--android:layout_marginBottom="10dip"-->
+                    <!--android:tag="6">-->
+
+
+                    <!--<View-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="0dp"-->
+                        <!--android:layout_weight="1" />-->
+
+                    <!--<com.joanzapata.iconify.widget.IconTextView-->
+                        <!--android:layout_width="80dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                        <!--android:text="{fa-download 19sp}"-->
+                        <!--android:id="@+id/downloadmg"-->
+                        <!--android:onClick="onDownload"-->
+                        <!--android:layout_toRightOf="@+id/imgUserimage"-->
+                        <!--android:gravity="center_vertical|center_horizontal"-->
+                        <!--android:paddingRight="5dp"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginLeft="50dp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="Open"-->
+                        <!--android:id="@+id/open"-->
+                        <!--android:clickable="true"-->
+                        <!--android:textColor="#0070C0"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:background="@drawable/text_view_pressed"-->
+                        <!--android:gravity="center_vertical|center_horizontal"-->
+
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:layout_below="@+id/downloadmg"-->
+                        <!--android:layout_toRightOf="@+id/imgUserimage"-->
+
+                        <!--/>-->
+
+                <!--</LinearLayout>-->
+
+
+            <!--</RelativeLayout>-->
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:weightSum="4">
 
-               <!-- <com.csm.utils.CircularNetworkImageView
-                    android:layout_width="78dp"
-                    android:layout_height="78dp"
-                    android:id="@+id/imgUserimage"
-                    />-->
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:id="@+id/imgUserimage"
-                     android:src="@drawable/pdf26" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="e-Varta jan-2015"
-                    android:id="@+id/txtCompUser"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/imgUserimage"
-                    android:layout_toEndOf="@+id/imgUserimage"
-                    android:textColor="#000"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="20dp"
-                    style="@style/HomeText"
-                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="1 Day ago"
-                    android:layout_below="@+id/txtCompUser"
-                    android:textColor="#999999"
-                    android:layout_toRightOf="@+id/imgUserimage"
-                    android:layout_toEndOf="@+id/imgUserimage"
-                    android:layout_marginLeft="5dp" />
                 <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:id="@+id/imgUserimage"
+                android:src="@drawable/pdf26"
+                    android:layout_weight="3" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="3">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Test dsfsfdf adsfsf"
+                            android:id="@+id/txtCompUser"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/imgUserimage"
+                            android:layout_toEndOf="@+id/imgUserimage"
+                            android:textColor="#000"
+                            style="@style/HomeText"
+                            android:textStyle="bold"
+                            android:layout_weight="1" />
+
+
+
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="{fa-download 19sp}"
+                                android:id="@+id/downloadmg"
+                                android:onClick="onDownload"
+                                android:layout_toRightOf="@+id/imgUserimage"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:paddingRight="5dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_weight="2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Open"
+                                android:id="@+id/open"
+                                android:clickable="true"
+                                android:textColor="#0070C0"
+                                android:textSize="18sp"
+                                android:background="@drawable/text_view_pressed"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:layout_below="@+id/downloadmg"
+                                android:layout_toRightOf="@+id/imgUserimage"
+
+                                android:layout_weight="2" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtday"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="19 Oct 2016 12:00 AM"
+                        android:layout_below="@+id/txtCompUser"
+                        android:textColor="#999999"
+                        android:layout_toRightOf="@+id/imgUserimage"
+                        android:layout_toEndOf="@+id/imgUserimage"
+                        android:layout_weight="2" />
+                    <!-- <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -73,38 +228,40 @@
                     android:onClick="onDownload"
                     android:layout_marginLeft="40dip"
 
-                    android:src="@drawable/download" />
-                <!--<Button
-                    android:id="@+id/button2"
+                    android:src="@drawable/download" />-->
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
+               <!-- <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@+id/downloadmg"
-                    android:layout_toRightOf="@+id/txtCompUser"
-                    android:layout_marginLeft="20dip"
-                    android:text="Open"
-                    android:onClick="view" />-->
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="1 Like"
+                    android:id="@+id/txtLikeCount"
+                    android:layout_marginLeft="10dp"/>-->
                 <TextView
-                    android:layout_width="81dp"
-                    android:layout_height="35dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Open"
-                    android:id="@+id/open"
-                    android:clickable="true"
-                    android:textColor="#0070C0"
-                    android:textSize="18sp"
-                    android:background="@drawable/text_view_pressed"
-                    android:layout_gravity="top|right"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@+id/downloadmg"
-                    android:layout_toRightOf="@+id/txtCompUser"
-                    android:layout_marginLeft="20dip"
-                    android:onClick="view"
-                    android:visibility="gone"
-                   />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="1 Comment"
+                    android:id="@+id/txtCmntcount"
+                    android:layout_marginLeft="10dp"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-            </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -113,7 +270,7 @@
                 android:id="@+id/layout_support_share_bar"
                 >
 
-                <LinearLayout
+          <!--      <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -123,18 +280,38 @@
                     android:id="@+id/layoutSupport"
                     >
 
-                   <!-- <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txt_icon_support"
-                        android:text="S"
-                        />-->
-                    <TextView
+                    <com.joanzapata.iconify.widget.IconTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Like"
+                        android:text="{fa-thumbs-o-up 19sp} Like"
                         android:id="@+id/txtSupport"
+                        android:textColor="#B5AFAE"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="3dp" />
+
+                </LinearLayout>-->
+<!--
+                <View
+                    android:layout_width="1dip"
+                    android:layout_height="fill_parent"
+                    android:background="#E4E4E4"
+                    />-->
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/layoutCmnt"
+                    >
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="{fa-comments-o 19sp} Comment"
+                        android:id="@+id/txtCmnt"
                         android:textColor="#B5AFAE"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="3dp" />
@@ -156,53 +333,13 @@
                     android:id="@+id/layoutShare"
                     >
 
-                   <!-- <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txt_icon_share"
-                        android:text="S"
-                        />-->
 
-                    <TextView
+                    <com.joanzapata.iconify.widget.IconTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Comments"
-                        android:id="@+id/textView28"
-                        android:textColor="#B5AFAE"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="3dp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1dip"
-                    android:layout_height="fill_parent"
-                    android:background="#E4E4E4"
-                    />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:id="@+id/layoutInvite"
-                    >
-
-                    <!--<TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txt_icon_invite"
-                        android:text="I"
-                        />-->
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Share"
-                        android:id="@+id/textView27"
+                        android:text="{fa-share-alt 19sp} Share"
+                        android:id="@+id/txtShare"
                         android:textColor="#B5AFAE"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="3dp" />
@@ -210,6 +347,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
 
 

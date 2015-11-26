@@ -44,26 +44,43 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
         <com.joanzapata.iconify.widget.IconTextView
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:paddingTop="10dp"
-            android:text="{ic-badge}"
+            android:text="{ic-badge 70dp}"
             android:layout_gravity="center"
             android:id="@+id/batchIcon" />
 
-        <TextView
+
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Android Studio"
-            android:layout_marginTop="13dp"
-            android:id="@+id/rank"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
+            android:layout_marginLeft="7dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Android Studio"
+                android:id="@+id/rank"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Small Text"
+                android:id="@+id/textView17" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

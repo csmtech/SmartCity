@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,7 @@ import com.csm.smartcity.common.AppCommon;
 import com.csm.smartcity.common.AppController;
 import com.csm.smartcity.common.ColoredSnackbar;
 import com.csm.smartcity.common.CommonDialogs;
+import com.csm.smartcity.common.OnLoadMoreListener;
 import com.csm.smartcity.common.UtilityMethods;
 import com.csm.smartcity.model.IdeaDataObject;
 import com.csm.smartcity.sqlLiteModel.DatabaseHandler;
@@ -61,6 +63,7 @@ public class RecentFragment extends Fragment {
     private String pagging_flag="0";
     JSONArray ideaData=null;
     LinearLayout networkUnavailable;
+    protected Handler loadMorehandler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,7 +94,6 @@ public class RecentFragment extends Fragment {
 
         callServiceMethd("getIdeas/R/" + strCitizenID + "/" + catagory_id + "/0", "LOAD_DEFAULT");
 
-
         //Initialize swipe to refresh view
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -99,10 +101,36 @@ public class RecentFragment extends Fragment {
 //                if ((AppCommon.isSoundEnable(getActivity())).equals("true")) {
 //                    slide_mp.start();
 //                }
-                //Refreshing data on server
-                // new DownloadFilesTask().execute(feedUrl);
-                //callServiceMethd("allComplaint/T/0/0/0/0","LOAD_TOP");
-                callServiceMethd("getIdeas/R/" + strCitizenID + "/" + catagory_id + "/0" , "LOAD_TOP");
+                callServiceMethd("getIdeas/R/" + strCitizenID + "/" + catagory_id + "/0", "LOAD_TOP");
+            }
+        });
+
+              /* Load More Items on Infinite Scroll*/
+        loadMorehandler=new Handler();
+        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                //add null , so the adapter will check view_type and show progress bar at bottom
+                recentArrayList.add(null);
+                mAdapter.notifyItemInserted(recentArrayList.size() - 1);
+
+                loadMorehandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //   remove progress item
+                        // compArrayList.remove(compArrayList.size() - 1);
+                        recentArrayList.remove(null);
+                        mAdapter.notifyItemRemoved(recentArrayList.size());
+                        //add items one by one
+                        int start = recentArrayList.size();
+                        // int end = start + 10;
+                        // callServiceMethd("allComplaint/T/0/" + start + "/0/0","LOAD_MORE");
+                        callServiceMethd("getIdeas/R/"+ strCitizenID + "/" + catagory_id + "/" + start , "LOAD_MORE");
+
+                        mAdapter.setLoaded();
+                        //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+                    }
+                }, 2000);
 
             }
         });
@@ -162,7 +190,7 @@ public class RecentFragment extends Fragment {
     private void loadOnlineIdeaData(String url,final String load_type){
 
         String fullUrl=AppCommon.getURL()+url;
-       // Log.i("atag",fullUrl);
+        Log.i("atag",fullUrl);
 
         final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,fullUrl, new JSONObject(),
                 new Response.Listener<JSONObject>() {
@@ -236,7 +264,8 @@ public class RecentFragment extends Fragment {
                     recentArrayList.add(tempArrayList.get(i));
                 }
                 mAdapter.notifyItemInserted(recentArrayList.size());
-               // mAdapter.setLoaded();
+                //mAdapter.notifyDataSetChanged();
+                mAdapter.setLoaded();
                 break;
         }
 

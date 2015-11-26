@@ -2,6 +2,7 @@ package com.csm.smartcity.catagoryIdeas;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -13,8 +14,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,13 +29,16 @@ import com.csm.smartcity.common.AppCommon;
 import com.csm.smartcity.common.AppController;
 import com.csm.smartcity.common.ColoredSnackbar;
 import com.csm.smartcity.common.CommonDialogs;
+import com.csm.smartcity.common.OnLoadMoreListener;
 import com.csm.smartcity.model.IdeaDataObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -48,6 +54,8 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
     String catg_id="0";
     private String strCitizenID="0";
     JSONArray ideaData=null;
+    protected Handler loadMorehandler;
+    LinearLayout networkUnavailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +69,11 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.catagoryswipeRefresh);
         progress_connect=(ProgressBar)findViewById(R.id.prog_connect);
         mRecyclerView.setHasFixedSize(true);
-
+        networkUnavailable=(LinearLayout)findViewById(R.id.networkUnavailable);
         if(AppCommon.isLogin(this)){
             strCitizenID=AppCommon.getLoginPrefData(this).getCITIZEN_ID();
         }
-        Log.i("atag", strCitizenID);
+
         catagoryArrayList=new ArrayList<IdeaDataObject>();
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -89,39 +97,94 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
             }
         });
 
+                    /* Load More Items on Infinite Scroll*/
+        loadMorehandler=new Handler();
+        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                //add null , so the adapter will check view_type and show progress bar at bottom
+                catagoryArrayList.add(null);
+                mAdapter.notifyItemInserted(catagoryArrayList.size() - 1);
+
+                loadMorehandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //   remove progress item
+                        // compArrayList.remove(compArrayList.size() - 1);
+                        catagoryArrayList.remove(null);
+                        mAdapter.notifyItemRemoved(catagoryArrayList.size());
+                        //add items one by one
+                        int start = catagoryArrayList.size();
+                        // int end = start + 10;
+                        // callServiceMethd("allComplaint/T/0/" + start + "/0/0","LOAD_MORE");
+                        callServiceMethd("getIdeas/C/" + strCitizenID + "/" + catg_id + "/" + start, "LOAD_MORE");
+                        mAdapter.setLoaded();
+                        //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
+                    }
+                }, 2000);
+
+            }
+        });
+
     }
 
-
     private void callServiceMethd(String url,String loadType){
+        networkUnavailable.setVisibility(View.GONE);
         if(AppCommon.isNetworkAvailability(this)==true) {
-
-            Log.i("atag", "connection available");
             loadOnlineIdeaData(url,loadType);
-
         }else{
+
+            bindOfflineData(url,loadType);
+
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.INTERNET_UNAVAILABLE, Snackbar.LENGTH_LONG);
             ColoredSnackbar.confirm(snackbar).show();
         }
 
     }
 
-    private void loadOnlineIdeaData(String url,final String load_type){
 
+    private void bindOfflineData(String url,final String load_type){
         String fullUrl=AppCommon.getURL()+url;
-        Log.i("atag",fullUrl);
+        ideaData=null;
+        Cache cache = AppController.getInstance().getRequestQueue().getCache();
+        Cache.Entry entry = cache.get(fullUrl);
+        cache.invalidate(fullUrl, true);
+        if (entry != null) {
+            // fetch the data from cache
+            try {
+                String data = new String(entry.data, "UTF-8");
+                try {
 
+                    ideaData= new JSONObject(data).getJSONArray("getIdeasResult");//getJSONObject(0).getJSONArray("MyallComplaint");
+                    bindDataInAdapter(load_type, ideaData);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }else{
+
+            if(mSwipeRefreshLayout!=null) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+            progress_connect.setVisibility(View.GONE);
+            networkUnavailable.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+
+    private void loadOnlineIdeaData(String url,final String load_type){
+        String fullUrl=AppCommon.getURL()+url;
         final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,fullUrl, new JSONObject(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-
-                            Log.i("atag",response.toString());
                             ideaData=response.getJSONArray("getIdeasResult");
-
                             bindDataInAdapter(load_type,ideaData);
                         } catch (Exception e) {
-                            //  AppCommon.hideDialog();
                             e.printStackTrace();
                         }
                     }
@@ -129,7 +192,6 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                //AppCommon.hideDialog();//Hidding dialog on PostJsonArrayRequest server side error
                 //Custom message for server error
                 Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), CommonDialogs.SERVER_ERROR, Snackbar.LENGTH_LONG);
                 ColoredSnackbar.confirm(snackbar).show();
@@ -182,11 +244,9 @@ public class CatagoryIdeaActivity extends AppCompatActivity {
                     catagoryArrayList.add(tempArrayList.get(i));
                 }
                 mAdapter.notifyItemInserted(catagoryArrayList.size());
-                // mAdapter.setLoaded();
+                mAdapter.setLoaded();
                 break;
         }
-
-        Log.i("atag", catagoryArrayList.size() + ":::::::::::::");
 
         if(mSwipeRefreshLayout!=null) {
             mSwipeRefreshLayout.setRefreshing(false);
